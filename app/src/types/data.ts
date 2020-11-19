@@ -17,6 +17,13 @@ export interface Vote {
   songID: string;
 }
 
+export interface Data {
+  artists: Artists;
+  songs: Songs;
+  users: Users;
+  votes: Votes;
+}
+
 export type Songs = {
   [songID: string]: Song;
 };

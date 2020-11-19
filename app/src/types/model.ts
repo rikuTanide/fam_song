@@ -1,5 +1,12 @@
 import { Artist, Artists, Song, Songs, User, Users, Vote, Votes } from "./data";
 
+export interface Models {
+  users: UserModels;
+  artists: ArtistModels;
+  songs: SongModels;
+  votes: VoteModels;
+}
+
 export class UserModels {
   constructor(private data: Users) {}
 

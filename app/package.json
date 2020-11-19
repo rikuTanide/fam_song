@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prettier" : "./node_modules/.bin/prettier src/types/*.ts* --write"
+    "prettier" : "./node_modules/.bin/prettier src/**/*.ts* --write"
   },
   "dependencies": {
     "@types/dateformat": "^3.0.1",
