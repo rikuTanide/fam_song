@@ -1,0 +1,37 @@
+yarn add @types/dateformat \
+@types/react-dom \
+@types/react-redux \
+@types/react-router-dom \
+@types/redux-actions \
+@types/redux-thunk \
+@typescript-eslint/eslint-plugin \
+@typescript-eslint/parser \
+bootstrap \
+clean-webpack-plugin \
+copy-webpack-plugin \
+css-loader \
+dateformat \
+eslint \
+eslint-config-prettier \
+eslint-plugin-prettier \
+firebase \
+html-webpack-plugin \
+range \
+react \
+react-bootstrap \
+react-dom \
+react-redux \
+react-router-dom \
+redux \
+redux-actions \
+redux-thunk \
+ts-loader \
+typescript \
+typescript-fsa \
+typescript-fsa-reducers \
+typescript-optional \
+utility-types \
+webpack \
+webpack-cli \
+webpack-dev-server \
+prettier
