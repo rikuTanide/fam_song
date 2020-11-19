@@ -1,4 +1,4 @@
-import { Artist, Artists, Song, Songs, User, Users, Votes } from "./data";
+import { Artist, Artists, Song, Songs, User, Users, Vote, Votes } from "./data";
 
 export class UserModels {
   constructor(private data: Users) {}
@@ -8,6 +8,8 @@ export class UserModels {
   public in(userIDs: string[]): UserModels {}
 
   public ex(): Users {}
+
+  public add(userID: string, user: User): UserModels {}
 }
 
 export class ArtistModels {
@@ -22,6 +24,8 @@ export class ArtistModels {
   public in(artistIDs: string[]): ArtistModels {}
 
   public ex(): Artists {}
+
+  public add(artistID: string, artist: Artist): ArtistModels {}
 }
 
 export class SongModels {
@@ -34,7 +38,10 @@ export class SongModels {
   public keys(): string[] {}
 
   public get(artistID: string, songID: string): Song | undefined {}
+
   public ex(): Songs {}
+
+  public add(artistID: string, songID: string, song: Song): SongModels {}
 }
 
 export class VoteModels {
@@ -49,4 +56,6 @@ export class VoteModels {
   public voteUsers(artistID: string, songID: string): string[] {}
 
   public ex(): Votes {}
+
+  public addVote(userID: string, artistID: string, vote: Vote): VoteModels {}
 }
