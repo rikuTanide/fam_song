@@ -5,6 +5,8 @@ export interface TopPageProps {
 export interface ArtistProps {
   artistID: string;
   name: string;
+  topSongID: string;
+  topSongName: string;
   count: number;
 }
 
@@ -15,9 +17,17 @@ export interface ArtistPageProps {
 }
 
 export interface SongProps {
-  artistID: string;
   songID: string;
   name: string;
+  voteCount: number;
+}
+
+export interface SongPageProps {
+  artistID: string;
+  artistName: string;
+  songID: string;
+  songName: string;
+
   voteUsers: VoteUserProps[];
 }
 
@@ -33,6 +43,15 @@ export interface UserPageProps {
 }
 
 export interface VoteSongProps {
+  artistID: string;
+  artistName: string;
+  songID: string;
+  songName: string;
+}
+
+export interface VotePageProps {
+  userID: string;
+  userName: string;
   artistID: string;
   artistName: string;
   songID: string;
