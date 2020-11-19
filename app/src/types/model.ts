@@ -1,4 +1,14 @@
-import { Artist, Artists, Song, Songs, User, Users, Vote, Votes } from "./data";
+import {
+  Artist,
+  Artists,
+  ArtistSongs,
+  Song,
+  Songs,
+  User,
+  Users,
+  Vote,
+  Votes,
+} from "./data";
 
 export interface Models {
   users: UserModels;
@@ -36,19 +46,32 @@ export class ArtistModels {
 }
 
 export class SongModels {
-  constructor(private data: Songs, private voteCounts: Map<string, number>) {}
+  constructor(
+    private data: Songs,
+    private voteCounts: Map<string, Map<string, number>>
+  ) {}
 
-  public whereArtistID(artistID: string): SongModels {}
-
-  public sortByVoteCount(): SongModels {}
-
-  public keys(): string[] {}
+  public getArtistSongs(artistID: string): ArtistSongModels {}
 
   public get(artistID: string, songID: string): Song | undefined {}
 
   public ex(): Songs {}
 
   public add(artistID: string, songID: string, song: Song): SongModels {}
+}
+
+export class ArtistSongModels {
+  constructor(private data: ArtistSongs) {}
+
+  public sortByVoteCount(): ArtistSongModels {}
+
+  public get(songID: string): Song | undefined {}
+
+  public keys(): string[] {}
+
+  public ex(): ArtistSongs {}
+
+  public add(songID: string, song: Song): ArtistSongModels {}
 }
 
 export class VoteModels {
@@ -64,5 +87,7 @@ export class VoteModels {
 
   public ex(): Votes {}
 
-  public addVote(userID: string, artistID: string, vote: Vote): VoteModels {}
+  public add(userID: string, artistID: string, vote: Vote): VoteModels {}
+
+  public remove(userID: string, artistID: string): VoteModels {}
 }

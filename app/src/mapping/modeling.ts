@@ -31,15 +31,17 @@ function mapArtistVoteCounts(votes: Votes): Map<string, number> {
   return res;
 }
 
-function mapSongVoteCounts(votes: Votes): Map<string, number> {
-  const res = new Map<string, number>();
+function mapSongVoteCounts(votes: Votes): Map<string, Map<string, number>> {
+  const res = new Map<string, Map<string, number>>();
   for (const userID in votes) {
     for (const artistID in votes[userID]) {
       const song = votes[userID][artistID];
       const songID = song.songID;
-      const now = res.get(songID) || 0;
-      const next = now + 1;
-      res.set(songID, next);
+      const nowOuter = res.get(artistID) || new Map<string, number>();
+      const nowInner = nowOuter.get(songID) || 0;
+      const next = nowInner + 1;
+      nowOuter.set(songID, next);
+      res.set(artistID, nowOuter);
     }
   }
   return res;

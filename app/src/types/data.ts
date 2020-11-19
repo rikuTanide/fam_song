@@ -1,5 +1,4 @@
 export interface Song {
-  artistID: string;
   name: string;
 }
 
@@ -24,12 +23,16 @@ export interface Data {
   votes: Votes;
 }
 
-export type Songs = {
-  [songID: string]: Song;
-};
-
 export type Artists = {
   [artistID: string]: Artist;
+};
+
+export type Songs = {
+  [artistID: string]: ArtistSongs;
+};
+
+export type ArtistSongs = {
+  [songID: string]: Song;
 };
 
 export type Users = {
