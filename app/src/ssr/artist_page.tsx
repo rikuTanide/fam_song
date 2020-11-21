@@ -1,8 +1,8 @@
 import * as React from "react";
-import { TopPageProps } from "../types/props";
+import { ArtistPageProps, TopPageProps } from "../types/props";
 import { Badge, Card, Jumbotron, ListGroup } from "react-bootstrap";
 
-export const TopPageComponent: React.FunctionComponent<TopPageProps> = (
+export const ArtistPageComponent: React.FunctionComponent<ArtistPageProps> = (
   props
 ) => (
   <html>
@@ -23,7 +23,7 @@ export const TopPageComponent: React.FunctionComponent<TopPageProps> = (
         <h1>代表曲は？</h1>
         <p className="lead">あなたが思うアーティストの代表曲を教えてください</p>
         <hr className="my-4" />
-        <p>ミスチルといえばTomorrow never knows？　innocent world？ しるし？</p>
+        <p>{props.name}といえば？</p>
         <a className="btn btn-primary btn-lg" href="/mypage">
           投票する
         </a>
@@ -33,15 +33,14 @@ export const TopPageComponent: React.FunctionComponent<TopPageProps> = (
           <Card.Title>みんなの投票</Card.Title>
         </Card.Header>
         <Card.Body>
-          {props.artists.map((a) => (
-            <Card key={a.artistID} className="mb-2">
-              <Card.Header>{a.name}</Card.Header>
-              <Card.Body>
-                {a.topSongName}
-                <Badge variant="danger">{a.count}</Badge>
-              </Card.Body>
-            </Card>
-          ))}
+          <ListGroup>
+            {props.songs.map((s) => (
+              <ListGroup.Item key={s.songID}>
+                {s.name}
+                <Badge variant="danger">{s.voteCount}</Badge>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
         </Card.Body>
       </Card>
     </body>
