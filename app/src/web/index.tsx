@@ -5,11 +5,7 @@ import { MyPageState } from "../types/page_state";
 import actionCreatorFactory from "typescript-fsa";
 import { Requests } from "../update/frontend";
 import { main } from "./main";
-
-export interface State {
-  data: Data;
-  myPageState: MyPageState;
-}
+import { State } from "../types/state";
 
 export const actionCreator = actionCreatorFactory();
 export type GetState = () => State;

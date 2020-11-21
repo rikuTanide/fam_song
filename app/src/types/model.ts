@@ -38,6 +38,8 @@ export class ArtistModels {
 
   public get(id: string): Artist | undefined {}
 
+  public voteCount(id: string): number {}
+
   public in(artistIDs: string[]): ArtistModels {}
 
   public ex(): Artists {}
@@ -58,6 +60,8 @@ export class SongModels {
   public ex(): Songs {}
 
   public add(artistID: string, songID: string, song: Song): SongModels {}
+
+  voteCount(artistID: string, songID: string): number {}
 }
 
 export class ArtistSongModels {
@@ -72,6 +76,8 @@ export class ArtistSongModels {
   public ex(): ArtistSongs {}
 
   public add(songID: string, song: Song): ArtistSongModels {}
+
+  public topSongID(): string | undefined {}
 }
 
 export class VoteModels {
