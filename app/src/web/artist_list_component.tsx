@@ -22,7 +22,7 @@ export const ArtistListComponent: React.SFC<{
   onSelectTab: OnSelectTab;
 }> = (props) => (
   <div>
-    <Card className="m-2 mt-5">
+    <Card className="m-2 mt-5 shadow-sm">
       <Card.Header>
         <Card.Title>投票しよう</Card.Title>
       </Card.Header>
@@ -41,7 +41,7 @@ export const ArtistListComponent: React.SFC<{
       </Card.Body>
     </Card>
 
-    <Card className="m-2 mt-5">
+    <Card className="m-2 mt-5 shadow-sm">
       <Card.Header>
         <Card.Title>投票したアーティスト</Card.Title>
       </Card.Header>
@@ -61,10 +61,10 @@ export const ArtistListComponent: React.SFC<{
       </Card.Body>
     </Card>
     <Form.Group>
-      <Card className="m-2 mt-5">
+      <Card className="my-5 mx-2 shadow-sm">
         <Card.Header>
           <Card.Title>
-            <Form.Label>アーティストを登録</Form.Label>
+            アーティストを登録
           </Card.Title>
         </Card.Header>
         <Card.Body>

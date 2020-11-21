@@ -9,6 +9,7 @@ import {
   Form,
   Button,
   Spinner,
+  Jumbotron,
 } from "react-bootstrap";
 import {
   OnCloseTab,
@@ -33,16 +34,20 @@ export const ArtistTabComponent: React.FunctionComponent<
         ×
       </Button>
     </p>
-    <h1>{props.name}</h1>
+    <Jumbotron className="m-1">
+      <h1>{props.name}</h1>
+    </Jumbotron>
 
-    <Card>
-      <Card.Body>
+    <Card className="mt-5 m-2 shadow-sm">
+      <Card.Header>
         <Card.Title>代表曲は？</Card.Title>
+      </Card.Header>
+      <Card.Body>
         <ListGroup>
           <ListGroup.Item>
             <Form.Check
-              type={"radio"}
-              label={"未定"}
+              type="radio"
+              label="未選択"
               name="songs"
               onChange={() => props.onRemoveVote(props.artistID)}
               checked={!props.selected}
@@ -63,36 +68,38 @@ export const ArtistTabComponent: React.FunctionComponent<
       </Card.Body>
     </Card>
 
-    <Card>
-      <Card.Body>
+    <Card className="my-5 mx-2 shadow-sm">
+      <Card.Header>
         <Card.Title>曲を追加</Card.Title>
-        <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">曲名は</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
+      </Card.Header>
+      <Card.Body>
+        <Form.Group>
+          <Form.Label>曲名</Form.Label>
+          <Form.Control
+            type="text"
             value={props.newSong}
             onChange={(e: any) =>
               props.onNewSongNameInput(props.artistID, e.target.value)
             }
             disabled={props.loading}
           />
-
-          <Button
-            disabled={!props.submitEnable}
-            variant="primary"
-            type="submit"
-            onClick={() => props.onNewSongSubmit(props.artistID)}
-          >
-            追加
-          </Button>
-          {props.loading ? (
-            <Spinner animation="border" variant="primary" size="sm" />
-          ) : (
-            ""
-          )}
-        </InputGroup>
+        </Form.Group>
       </Card.Body>
+      <Card.Footer className="text-muted">
+        <Button
+          disabled={!props.submitEnable}
+          variant="primary"
+          type="submit"
+          onClick={() => props.onNewSongSubmit(props.artistID)}
+        >
+          追加
+        </Button>
+        {props.loading ? (
+          <Spinner animation="border" variant="primary" size="sm" />
+        ) : (
+          ""
+        )}
+      </Card.Footer>
     </Card>
   </div>
 );
