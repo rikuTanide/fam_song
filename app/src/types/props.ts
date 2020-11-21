@@ -63,9 +63,23 @@ export interface VotePageProps {
 
 export interface MyPageProps {
   tab: string;
+  votedArtists: VotedArtistProps[];
+  notVotedArtists: NotVotedArtistProps[];
   tabs: ArtistTabProps[];
   newArtist: string;
   submitEnable: boolean;
+}
+
+export interface VotedArtistProps {
+  artistID: string;
+  artistName: string;
+  songID: string;
+  songName: string;
+}
+
+export interface NotVotedArtistProps {
+  artistID: string;
+  artistName: string;
 }
 
 export interface ArtistTabProps {

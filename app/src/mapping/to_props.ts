@@ -3,11 +3,13 @@ import {
   ArtistProps,
   ArtistTabProps,
   MyPageProps,
+  NotVotedArtistProps,
   SongOptionProps,
   SongPageProps,
   SongProps,
   TopPageProps,
   UserPageProps,
+  VotedArtistProps,
   VotePageProps,
   VoteSongProps,
   VoteUserProps,
@@ -201,10 +203,38 @@ export function toMyPageProps(state: State): MyPageProps {
         submitEnable: newSong.trim().length > 0,
       };
     });
+
+  const votedArtists = model.votes.voteArtists(myPageState.userID).map(
+    (aid): VotedArtistProps => {
+      const artistName = model.artists.get(aid)?.name;
+      const sid = model.votes.find(myPageState.userID, aid);
+      const song = sid ? model.songs.get(aid, sid) : undefined;
+      const songName = song?.name;
+      return {
+        artistID: aid,
+        artistName: artistName || "",
+        songID: sid || "",
+        songName: songName || "",
+      };
+    }
+  );
+
+  const notVotedArtists = model.votes.voteArtists(myPageState.userID).map(
+    (aid): NotVotedArtistProps => {
+      const artistName = model.artists.get(aid)?.name;
+      return {
+        artistID: aid,
+        artistName: artistName || "",
+      };
+    }
+  );
+
   return {
     newArtist: myPageState.newArtist,
     submitEnable: myPageState.newArtist.trim().length > 0,
     tab: myPageState.selectTab,
     tabs: tabs,
+    votedArtists: votedArtists,
+    notVotedArtists: notVotedArtists,
   };
 }
