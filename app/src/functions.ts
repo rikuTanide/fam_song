@@ -47,7 +47,7 @@ export const onRequest = functions
 async function readData(snapshot: DataSnapshot): Promise<Data> {
     return new Promise<any>(resolve => {
         snapshot.ref.root.child("data").on('value', ss => {
-            const data = ss.val() as Data
+            const data = (ss.val() || {}) as Data;
             const pdata: Data = {
                 artists: data.artists || {},
                 users: data.users || {},
