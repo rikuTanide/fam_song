@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
-import { actionCreator, ExternalArguments, GetState } from "./index";
+import { ExternalArguments, GetState } from "./index";
+import actionCreatorFactory from "typescript-fsa";
 
 export function postArtist(name: string) {
   return async (
@@ -32,7 +33,7 @@ export function deleteVote(artistID: string, songID: string) {
     api: ExternalArguments
   ) => {};
 }
-
+const actionCreator = actionCreatorFactory();
 export const selectTab = actionCreator<string>("selectTab");
 export const deleteTab = actionCreator<string>("deleteTab");
 export const inputNewArtistName = actionCreator<string>("inputNewArtistName");

@@ -1,33 +1,35 @@
 import * as React from "react";
 import { Tabs } from "react-bootstrap";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import { toMyPageProps } from "../mapping/to_props";
 import * as actions from "./actions";
-import { bindActionCreators } from "redux";
+import {
+  bindActionCreators,
+  createStore,
+  compose,
+  applyMiddleware,
+} from "redux";
 import { ArtistTabProps, MyPageProps } from "../types/props";
 import { ArtistListComponent } from "./artist_list_component";
 import { ArtistTabComponent } from "./artist_tab_component";
+import { State } from "../types/state";
+import { reducer } from "./reducer";
+import thunk from "redux-thunk";
+import firebase from "firebase";
+import { MyPageTopComponent } from "./my_page_top";
 
-type AppProps = MyPageProps & typeof actions;
+export const RootComponent: React.SFC<{ app: firebase.app.App }> = (props) => {
+  const composeEnhancers = compose;
 
-class _RootComponent extends React.Component<AppProps> {
-  public render(): React.ReactElement {
-    return (
-      <Tabs>
-        <ArtistListComponent />
-        {this.artistTabs()}
-      </Tabs>
-    );
-  }
-  private artistTabs() {
-    return this.props.tabs.map((t) => this.artistTab(t));
-  }
-  private artistTab(t: ArtistTabProps) {
-    return <ArtistTabComponent key={t.artistID} />;
-  }
-}
+  const enhancer = composeEnhancers(
+    applyMiddleware(thunk.withExtraArgument({ firebase: props.app }))
+  );
 
-export const RootComponent = connect(
-  toMyPageProps,
-  (dispatch: any): typeof actions => bindActionCreators(actions, dispatch)
-)(_RootComponent);
+  const store = createStore<State, any, any, any>(reducer, enhancer);
+
+  return (
+    <Provider store={store}>
+      <MyPageTopComponent />
+    </Provider>
+  );
+};

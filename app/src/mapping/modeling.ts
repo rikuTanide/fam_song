@@ -15,7 +15,7 @@ export function modeling(data: Data): Models {
     artists: new ArtistModels(data.artists, artistVoteCounts),
     songs: new SongModels(data.songs, songVoteCounts),
     users: new UserModels(data.users),
-    votes: new VoteModels(data.votes),
+    votes: new VoteModels(data.votes, data.artists),
   };
 }
 

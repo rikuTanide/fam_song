@@ -16,11 +16,7 @@
     "moduleResolution": "node"
   },
   "exclude": [
-    "node_modules",
-      "src/types/**/*",
-      "src/mapping/*",
-      "src/update/*",
-      "values.ts"
+    "node_modules"
   ],
   "include" :[ "./src/**/*"]
 }

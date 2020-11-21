@@ -1,5 +1,5 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
-import { State } from "./index";
+import { State } from "../types/state";
 const initialState: State = {
   data: {
     songs: {},
@@ -10,9 +10,10 @@ const initialState: State = {
   myPageState: {
     newArtist: "",
     newSongs: [],
-    selectArtist: "",
+    selectTab: "",
     tabs: [],
+    userID: "",
   },
 };
 
-const reducer = reducerWithInitialState<State>(initialState);
+export const reducer = reducerWithInitialState<State>(initialState);
