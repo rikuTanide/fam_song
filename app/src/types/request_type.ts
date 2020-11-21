@@ -3,6 +3,7 @@ export interface Request {
   path: string;
   params: any;
   payload: any;
+  userID: string;
 }
 
 export interface Response {

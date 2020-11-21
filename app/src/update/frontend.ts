@@ -8,7 +8,6 @@ export class Requests {
 
   constructor(private app: firebase.app.App) {
     const path = `responses/${this.app.auth().currentUser?.uid || ""}`;
-    console.log(path);
     this.app.database().ref(path).remove();
     this.app
       .database()
@@ -31,6 +30,7 @@ export class Requests {
       params: null,
       payload: artist,
       path: PATH_ARTISTS,
+      userID: this.app.auth().currentUser!.uid,
     };
     return await this.push(req);
   }
