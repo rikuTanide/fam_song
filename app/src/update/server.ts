@@ -14,12 +14,12 @@ export function update(
   fs: FirebaseService,
   models: Models,
   request: Request,
-  userID: string
+  userID: string,
+  requestID: string
 ): Response {
   const method = request.method;
   const path = request.path;
   const payload = request.payload;
-  const requestID = request.requestID;
 
   if (method == "PUT" && path == PATH_USERS) {
     return putUser(fs, models, requestID, userID, payload as User);

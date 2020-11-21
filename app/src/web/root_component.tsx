@@ -17,12 +17,18 @@ import { reducer } from "./reducer";
 import thunk from "redux-thunk";
 import firebase from "firebase";
 import { MyPageTopComponent } from "./my_page_top";
+import { Requests } from "../update/frontend";
 
-export const RootComponent: React.SFC<{ app: firebase.app.App }> = (props) => {
+export const RootComponent: React.SFC<{
+  app: firebase.app.App;
+  requests: Requests;
+}> = (props) => {
   const composeEnhancers = compose;
 
   const enhancer = composeEnhancers(
-    applyMiddleware(thunk.withExtraArgument({ firebase: props.app }))
+    applyMiddleware(
+      thunk.withExtraArgument({ firebase: props.app, requests: props.requests })
+    )
   );
 
   const store = createStore<State, any, any, any>(reducer, enhancer);

@@ -3,6 +3,7 @@ export interface MyPageState {
   tabs: string[];
   selectTab: string;
   newArtist: string;
+  loading: boolean;
   newSongs: NewSongState[];
 }
 

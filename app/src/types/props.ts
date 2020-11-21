@@ -68,6 +68,7 @@ export interface MyPageProps {
   tabs: ArtistTabProps[];
   newArtist: string;
   submitEnable: boolean;
+  loading: boolean;
 }
 
 export interface VotedArtistProps {

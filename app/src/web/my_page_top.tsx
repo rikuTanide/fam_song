@@ -14,7 +14,13 @@ class _MyPageTopComponent extends React.Component<AppProps> {
     return (
       <Tabs activeKey={this.props.tab}>
         <Tab.Content eventKey="" title="一覧">
-          <ArtistListComponent/>
+          <ArtistListComponent
+            loading={this.props.loading}
+            enable={this.props.submitEnable}
+            newArtistName={this.props.newArtist}
+            onNewArtistNameInput={this.props.inputNewArtistName}
+            onNewArtistSubmit={() => this.props.postArtist()}
+          />
         </Tab.Content>
         {this.artistTabs()}
       </Tabs>

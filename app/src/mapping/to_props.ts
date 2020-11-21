@@ -229,6 +229,8 @@ export function toMyPageProps(state: State): MyPageProps {
     }
   );
 
+  console.log(myPageState.loading);
+
   return {
     newArtist: myPageState.newArtist,
     submitEnable: myPageState.newArtist.trim().length > 0,
@@ -236,5 +238,6 @@ export function toMyPageProps(state: State): MyPageProps {
     tabs: tabs,
     votedArtists: votedArtists,
     notVotedArtists: notVotedArtists,
+    loading: myPageState.loading,
   };
 }

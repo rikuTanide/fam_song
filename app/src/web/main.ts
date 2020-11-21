@@ -20,7 +20,11 @@ export async function main() {
   app.auth().onAuthStateChanged(async (user) => {
     if (user) {
       const element = document.getElementById("react-root");
-      const rootElement = React.createElement(RootComponent, { app: app });
+      const req = new Requests(app);
+      const rootElement = React.createElement(RootComponent, {
+        app: app,
+        requests: req,
+      });
       ReactDOM.render(rootElement, element);
     } else {
       const button = document.createElement("button");
@@ -31,7 +35,6 @@ export async function main() {
           .auth()
           .signInWithPopup(provider)
           .then((result) => {
-            const req = new Requests();
             console.log(result.additionalUserInfo);
             return window.location.reload();
           });
