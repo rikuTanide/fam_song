@@ -1,5 +1,5 @@
 export interface MyPageState {
-  tab: string;
+  tabs: string[];
   selectArtist: string;
   newArtist: string;
   newSongs: NewSongState[];

@@ -1,39 +1,22 @@
 import * as React from "react";
-import firebase from "firebase";
 import "firebase/auth";
-import * as ReactDOM from "react-dom";
+import { Data } from "../types/data";
+import { MyPageState } from "../types/page_state";
+import actionCreatorFactory from "typescript-fsa";
+import { Requests } from "../update/frontend";
+import { main } from "./main";
 
-export async function main() {
-  const app = firebase.initializeApp(
-    await (await fetch("/__/firebase/init.json")).json()
-  );
-  app.auth().onAuthStateChanged(async (user) => {
-    if (user) {
-      const element = document.getElementById("react-root");
-      const rootElement = React.createElement(RootComponent);
-      ReactDOM.render(rootElement, element);
-    } else {
-      const button = document.createElement("button");
-      button.addEventListener("click", () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({ prompt: "consent" });
-        void app
-          .auth()
-          .signInWithPopup(provider)
-          .then((result) => {
-            return window.location.reload();
-          });
-      });
-      button.textContent = "ログイン";
-      document.body.appendChild(button);
-    }
-  });
+export interface State {
+  data: Data;
+  myPageState: MyPageState;
 }
 
-class RootComponent extends React.Component {
-  public render(): React.ReactElement {
-    return <div>aaa</div>;
-  }
+export const actionCreator = actionCreatorFactory();
+export type GetState = () => State;
+
+export interface ExternalArguments {
+  requests: Requests;
+  uid: string;
 }
 
 main();

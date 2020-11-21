@@ -42,3 +42,10 @@ export type Users = {
 export type Votes = {
   [userID: string]: { [artistID: string]: Vote };
 };
+
+export interface Data {
+  artists: Artists;
+  users: Users;
+  votes: Votes;
+  songs: Songs;
+}
