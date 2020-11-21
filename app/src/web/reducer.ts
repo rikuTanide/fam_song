@@ -28,7 +28,8 @@ function contain<T>(array: T[], needle: T): boolean {
 export const reducer = reducerWithInitialState<State>(initialState)
   .case(actions.setUserID, setUserID)
   .case(actions.setLoading, setLoading)
-  .case(actions.selectTab, selectTab)
+  .case(actions._selectTab, selectTab)
+  .case(actions.setTabs, setTabs)
   .case(actions.deleteTab, deleteTab)
   .case(actions.inputNewArtistName, inputNewArtistName)
   .case(actions.inputNewSongName, inputNewSongName)
@@ -58,6 +59,15 @@ function selectTab(state: State, tab: string): State {
     ...myPageState,
     tabs: newTabs,
     selectTab: tab,
+  };
+  return { ...state, myPageState: newMyPageState };
+}
+
+function setTabs(state: State, tabs: string[]): State {
+  const myPageState = state.myPageState;
+  const newMyPageState: MyPageState = {
+    ...myPageState,
+    tabs: tabs,
   };
   return { ...state, myPageState: newMyPageState };
 }

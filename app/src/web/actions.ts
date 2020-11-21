@@ -123,10 +123,23 @@ export function deleteVote(artistID: string) {
     dispatch(dataUpdate(newData));
   };
 }
+export function selectTab(artistID: string) {
+  return async (
+      dispatch: Dispatch,
+      getState: GetState,
+      api: ExternalArguments
+  ) => {
+    dispatch(_selectTab(artistID));
+    const state = getState();
+    api.storageService.setTabs(state.myPageState.tabs);
+    api.storageService.setCurrentTab(state.myPageState.selectTab);
+  };
+}
 const actionCreator = actionCreatorFactory();
 export const setUserID = actionCreator<string>("setUserID");
 export const setLoading = actionCreator<boolean>("setLoading");
-export const selectTab = actionCreator<string>("selectTab");
+export const _selectTab = actionCreator<string>("_selectTab");
+export const setTabs = actionCreator<string[]>("setTabs");
 export const deleteTab = actionCreator<string>("deleteTab");
 export const inputNewArtistName = actionCreator<string>("inputNewArtistName");
 export const inputNewSongName = actionCreator<{
