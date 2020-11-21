@@ -2,7 +2,7 @@ import * as React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { TopPageComponent } from "../ssr/top_page";
 import { ArtistPageProps, TopPageProps } from "../types/props";
-import {ArtistPageComponent} from "../ssr/artist_page";
+import { ArtistPageComponent } from "../ssr/artist_page";
 
 function main() {
   const props: ArtistPageProps = {

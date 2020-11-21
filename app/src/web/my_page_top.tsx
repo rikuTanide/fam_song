@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { toMyPageProps } from "../mapping/to_props";
 import * as actions from "./actions";
 import { bindActionCreators } from "redux";
-const imgUrl =
+export const imgUrl =
   "https://pbs.twimg.com/profile_images/747557956787441666/BKpBirO3_x96.jpg";
 type AppProps = MyPageProps & typeof actions;
 class _MyPageTopComponent extends React.Component<AppProps> {
