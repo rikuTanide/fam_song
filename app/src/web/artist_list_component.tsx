@@ -63,9 +63,7 @@ export const ArtistListComponent: React.SFC<{
     <Form.Group>
       <Card className="my-5 mx-2 shadow-sm">
         <Card.Header>
-          <Card.Title>
-            アーティストを登録
-          </Card.Title>
+          <Card.Title>アーティストを登録</Card.Title>
         </Card.Header>
         <Card.Body>
           <Form.Group>

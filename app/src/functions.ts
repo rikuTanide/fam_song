@@ -5,14 +5,12 @@ import { FirebaseService, update } from "./update/server";
 import * as admin from "firebase-admin";
 import { Data } from "./types/data";
 import { modeling } from "./mapping/modeling";
+import { server } from "./server/app";
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+export const httpHandle = functions.https.onRequest(server());
 
 class FirebaseServiceImple implements FirebaseService {
   constructor(private ref: admin.database.Reference) {}
