@@ -90,6 +90,7 @@ export interface ArtistTabProps {
   songs: SongOptionProps[];
   newSong: string;
   submitEnable: boolean;
+  loading: boolean;
 }
 
 export interface SongOptionProps {

@@ -11,6 +11,7 @@ export interface ExternalArguments {
   uid: string;
 }
 
+export type OnSelectTab = (artistID: string) => void;
 export type OnNewArtistNameInput = (name: string) => void;
 export type OnNewArtistSubmit = () => void;
 export type OnNewSongNameInput = (artistID: string, name: string) => void;

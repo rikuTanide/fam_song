@@ -1,7 +1,7 @@
 import { Request, Response } from "../types/request_type";
 import { Artist, Song, User, Vote } from "../types/data";
 import firebase from "firebase";
-import { PATH_ARTISTS } from "../values";
+import { PATH_ARTISTS, PATH_SONGS, PATH_VOTE } from "../values";
 
 export class Requests {
   private ps: Map<string, Callback> = new Map<string, Callback>();
@@ -35,9 +35,25 @@ export class Requests {
     return await this.push(req);
   }
   public async postSong(artistID: string, song: Song): Promise<string> {
-    return "";
+    const req: Request = {
+      method: "POST",
+      params: { artistID: artistID },
+      payload: song,
+      path: PATH_SONGS,
+      userID: this.app.auth().currentUser!.uid,
+    };
+    return await this.push(req);
   }
-  public putVote(artistID: string, vote: Vote) {}
+  public putVote(artistID: string, vote: Vote) {
+    const req: Request = {
+      method: "PUT",
+      params: { artistID: artistID },
+      payload: vote,
+      path: PATH_VOTE,
+      userID: this.app.auth().currentUser!.uid,
+    };
+    this.push(req);
+  }
   public deleteVote(artistID: string) {}
 
   private push(request: Request): Promise<string> {

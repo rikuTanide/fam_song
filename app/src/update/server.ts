@@ -1,6 +1,5 @@
 import { Request, Response } from "../types/request_type";
 import { Artist, Song, User, Vote } from "../types/data";
-import { modeling } from "../mapping/modeling";
 import { Models } from "../types/model";
 import { PATH_ARTISTS, PATH_SONGS, PATH_USERS, PATH_VOTE } from "../values";
 
@@ -47,7 +46,7 @@ function putVote(
   artistID: string,
   vote: Vote
 ): Response {
-  fs.set(`/votes/users/${userID}/artists/${artistID}`, vote);
+  fs.set(`/data/votes/${userID}/${artistID}`, vote);
   return {
     requestID: requestID,
     result: null,
@@ -61,7 +60,7 @@ function deleteVote(
   userID: string,
   artistID: string
 ): Response {
-  fs.remove(`/votes/users/${userID}/artists/${artistID}`);
+  fs.remove(`/data/votes/${userID}/${artistID}`);
   return {
     requestID: requestID,
     result: null,
@@ -75,7 +74,7 @@ function postSong(
   artistID: string,
   song: Song
 ): Response {
-  const songID = fs.push(`/artists/${artistID}/songs/`, song);
+  const songID = fs.push(`/data/songs/${artistID}`, song);
   return {
     requestID: requestID,
     result: songID,
@@ -89,7 +88,7 @@ function putUser(
   userID: string,
   user: User
 ): Response {
-  fs.set(`/users/${userID}`, user);
+  fs.set(`/data/users/${userID}`, user);
   return {
     requestID: requestID,
     result: null,
@@ -102,7 +101,7 @@ function postArtist(
   requestID: string,
   artist: Artist
 ): Response {
-  const artistID = fs.push("/artists", artist);
+  const artistID = fs.push("/data/artists", artist);
   return {
     requestID: requestID,
     result: artistID,

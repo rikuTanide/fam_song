@@ -185,7 +185,7 @@ export class VoteModels {
   public notVoteArtists(userID: string): string[] {
     const artistIDs = Object.keys(this.artists);
     const set = new Set<string>(artistIDs);
-    this.voteArtists(userID).forEach(set.delete);
+    this.voteArtists(userID).forEach((id) => set.delete(id));
     return [...set.values()];
   }
 

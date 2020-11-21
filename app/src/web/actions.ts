@@ -2,6 +2,7 @@ import { Dispatch } from "redux";
 import { ExternalArguments, GetState } from "./index";
 import actionCreatorFactory from "typescript-fsa";
 import { Data, Users, Artists, Songs, Votes } from "../types/data";
+import { modeling } from "../mapping/modeling";
 
 export function updateUsers(users: Users) {
   return async (
@@ -58,7 +59,8 @@ export function postArtist() {
     api: ExternalArguments
   ) => {
     const state = getState();
-    const name = state.myPageState.newArtist;
+    const name = state.myPageState.newArtist.trim();
+    if (!name) return;
     dispatch(setLoading(true));
     await api.requests.postArtist({ name: name });
     dispatch(setLoading(false));
@@ -66,12 +68,22 @@ export function postArtist() {
   };
 }
 
-export function postSong(artistID: string, name: string) {
+export function postSong(artistID: string) {
   return async (
     dispatch: Dispatch,
     getState: GetState,
     api: ExternalArguments
-  ) => {};
+  ) => {
+    const state = getState();
+    const name = state.myPageState.newSongs
+      .find((ns) => ns.artistID == artistID)
+      ?.newSong?.trim();
+    if (!name) return;
+    dispatch(setLoading(true));
+    await api.requests.postSong(artistID, { name: name });
+    dispatch(setLoading(false));
+    dispatch(inputNewSongName({ artistID: artistID, songName: "" }));
+  };
 }
 
 export function putVote(artistID: string, songID: string) {
@@ -79,7 +91,19 @@ export function putVote(artistID: string, songID: string) {
     dispatch: Dispatch,
     getState: GetState,
     api: ExternalArguments
-  ) => {};
+  ) => {
+    api.requests.putVote(artistID, { songID: songID });
+    const data = getState().data;
+    const model = modeling(data);
+    const newVotes = model.votes
+      .add(api.uid, artistID, { songID: songID })
+      .ex();
+    const newData: Data = {
+      ...data,
+      votes: newVotes,
+    };
+    dispatch(dataUpdate(newData));
+  };
 }
 
 export function deleteVote(artistID: string, songID: string) {

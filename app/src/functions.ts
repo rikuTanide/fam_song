@@ -41,19 +41,20 @@ export const onRequest = functions
     .database.ref("/requests/{event_id}")
     .onCreate(async (snapshot) => {
         await onCreate(snapshot);
+        await snapshot.ref.remove();
     });
 
 
 async function readData(snapshot: DataSnapshot): Promise<Data> {
     return new Promise<any>(resolve => {
-        snapshot.ref.root.child("data").on('value', ss => {
+        snapshot.ref.root.child("data").once('value', ss => {
             const data = (ss.val() || {}) as Data;
             const pdata: Data = {
                 artists: data.artists || {},
                 users: data.users || {},
                 votes: data.votes || {},
                 songs: data.songs || {},
-            }
+            };
             resolve(pdata);
         });
     });

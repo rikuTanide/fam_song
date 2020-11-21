@@ -201,6 +201,7 @@ export function toMyPageProps(state: State): MyPageProps {
         songs: songs,
         newSong: newSong,
         submitEnable: newSong.trim().length > 0,
+        loading: myPageState.loading,
       };
     });
 
@@ -219,7 +220,7 @@ export function toMyPageProps(state: State): MyPageProps {
     }
   );
 
-  const notVotedArtists = model.votes.voteArtists(myPageState.userID).map(
+  const notVotedArtists = model.votes.notVoteArtists(myPageState.userID).map(
     (aid): NotVotedArtistProps => {
       const artistName = model.artists.get(aid)?.name;
       return {

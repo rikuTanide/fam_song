@@ -18,6 +18,8 @@ import thunk from "redux-thunk";
 import firebase from "firebase";
 import { MyPageTopComponent } from "./my_page_top";
 import { Requests } from "../update/frontend";
+import { dataUpdate, setUserID } from "./actions";
+import { Data } from "../types/data";
 
 export const RootComponent: React.SFC<{
   app: firebase.app.App;
@@ -27,11 +29,26 @@ export const RootComponent: React.SFC<{
 
   const enhancer = composeEnhancers(
     applyMiddleware(
-      thunk.withExtraArgument({ firebase: props.app, requests: props.requests })
+      thunk.withExtraArgument({ uid: props.app.auth().currentUser!.uid, requests: props.requests })
     )
   );
 
   const store = createStore<State, any, any, any>(reducer, enhancer);
+  store.dispatch(setUserID(props.app.auth().currentUser!.uid));
+
+  props.app
+    .database()
+    .ref("data")
+    .on("value", (ss) => {
+      const data = (ss.val() || {}) as Data;
+      const pdata: Data = {
+        artists: data.artists || {},
+        users: data.users || {},
+        votes: data.votes || {},
+        songs: data.songs || {},
+      };
+      store.dispatch(dataUpdate(pdata));
+    });
 
   return (
     <Provider store={store}>
