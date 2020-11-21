@@ -11,6 +11,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 import {
+  OnCloseTab,
   OnNewSongNameInput,
   OnNewSongSubmit,
   OnRemoveVote,
@@ -23,9 +24,13 @@ export const ArtistTabComponent: React.FunctionComponent<
     onNewSongSubmit: OnNewSongSubmit;
     onVote: OnVote;
     onRemoveVote: OnRemoveVote;
+    onCloseTab: OnCloseTab,
   }
 > = (props) => (
   <div>
+    <p className="text-right">
+      <Button variant="danger" onClick={()=>props.onCloseTab(props.artistID)}>×</Button>
+    </p>
     <h1>{props.name}</h1>
 
     <Card>
