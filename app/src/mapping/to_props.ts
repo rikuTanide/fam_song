@@ -202,6 +202,7 @@ export function toMyPageProps(state: State): MyPageProps {
         newSong: newSong,
         submitEnable: newSong.trim().length > 0,
         loading: myPageState.loading,
+        selected: !!model.votes.find(myPageState.userID, aid),
       };
     });
 

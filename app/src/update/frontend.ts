@@ -54,7 +54,16 @@ export class Requests {
     };
     this.push(req);
   }
-  public deleteVote(artistID: string) {}
+  public deleteVote(artistID: string) {
+    const req: Request = {
+      method: "DELETE",
+      params: { artistID: artistID },
+      payload: null,
+      path: PATH_VOTE,
+      userID: this.app.auth().currentUser!.uid,
+    };
+    this.push(req);
+  }
 
   private push(request: Request): Promise<string> {
     const r = this.app.database().ref("requests").push(request);

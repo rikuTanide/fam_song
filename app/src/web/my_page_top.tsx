@@ -48,6 +48,7 @@ class _MyPageTopComponent extends React.Component<AppProps> {
           }
           onNewSongSubmit={(aid) => this.props.postSong(aid)}
           onVote={(artistID, songID) => this.props.putVote(artistID, songID)}
+          onRemoveVote={(artistID) => this.props.deleteVote(artistID)}
         />
       </Tab.Content>
     );

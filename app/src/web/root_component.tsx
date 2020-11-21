@@ -29,7 +29,10 @@ export const RootComponent: React.SFC<{
 
   const enhancer = composeEnhancers(
     applyMiddleware(
-      thunk.withExtraArgument({ uid: props.app.auth().currentUser!.uid, requests: props.requests })
+      thunk.withExtraArgument({
+        uid: props.app.auth().currentUser!.uid,
+        requests: props.requests,
+      })
     )
   );
 

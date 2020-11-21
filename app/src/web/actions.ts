@@ -106,12 +106,22 @@ export function putVote(artistID: string, songID: string) {
   };
 }
 
-export function deleteVote(artistID: string, songID: string) {
+export function deleteVote(artistID: string) {
   return async (
     dispatch: Dispatch,
     getState: GetState,
     api: ExternalArguments
-  ) => {};
+  ) => {
+    api.requests.deleteVote(artistID);
+    const data = getState().data;
+    const model = modeling(data);
+    const newVotes = model.votes.remove(api.uid, artistID).ex();
+    const newData: Data = {
+      ...data,
+      votes: newVotes,
+    };
+    dispatch(dataUpdate(newData));
+  };
 }
 const actionCreator = actionCreatorFactory();
 export const setUserID = actionCreator<string>("setUserID");

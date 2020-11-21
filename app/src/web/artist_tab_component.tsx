@@ -10,13 +10,19 @@ import {
   Button,
   Spinner,
 } from "react-bootstrap";
-import { OnNewSongNameInput, OnNewSongSubmit, OnVote } from "./index";
+import {
+  OnNewSongNameInput,
+  OnNewSongSubmit,
+  OnRemoveVote,
+  OnVote,
+} from "./index";
 
 export const ArtistTabComponent: React.FunctionComponent<
   ArtistTabProps & {
     onNewSongNameInput: OnNewSongNameInput;
     onNewSongSubmit: OnNewSongSubmit;
     onVote: OnVote;
+    onRemoveVote: OnRemoveVote;
   }
 > = (props) => (
   <div>
@@ -26,6 +32,15 @@ export const ArtistTabComponent: React.FunctionComponent<
       <Card.Body>
         <Card.Title>代表曲は？</Card.Title>
         <ListGroup>
+          <ListGroup.Item>
+            <Form.Check
+              type={"radio"}
+              label={"未定"}
+              name="songs"
+              onChange={() => props.onRemoveVote(props.artistID)}
+              checked={!props.selected}
+            />
+          </ListGroup.Item>
           {props.songs.map((s) => (
             <ListGroup.Item key={s.songID}>
               <Form.Check
