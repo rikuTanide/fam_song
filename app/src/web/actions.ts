@@ -125,9 +125,9 @@ export function deleteVote(artistID: string) {
 }
 export function selectTab(artistID: string) {
   return async (
-      dispatch: Dispatch,
-      getState: GetState,
-      api: ExternalArguments
+    dispatch: Dispatch,
+    getState: GetState,
+    api: ExternalArguments
   ) => {
     dispatch(_selectTab(artistID));
     const state = getState();

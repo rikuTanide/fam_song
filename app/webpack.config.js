@@ -30,4 +30,15 @@ module.exports = {
         }),
         // new copyWebpackPlugin({patterns: [{from: './src/style', to: "style"}, {from: './src/static'}]}),
     ],
+    devServer: {
+        host: 'localhost',
+        port: 8080,
+
+        // 「/api」を別サーバーへ転送する設定
+        proxy: {
+            '/__': {
+                target: 'http://localhost:5000/'
+            }
+        }
+    },
 };

@@ -18,30 +18,30 @@ import thunk from "redux-thunk";
 import firebase from "firebase";
 import { MyPageTopComponent } from "./my_page_top";
 import { Requests } from "../update/frontend";
-import {dataUpdate, selectTab, setTabs, setUserID} from "./actions";
+import { dataUpdate, selectTab, setTabs, setUserID } from "./actions";
 import { Data } from "../types/data";
-import {StorageService} from "./index";
+import { StorageService } from "./index";
 
 export const RootComponent: React.SFC<{
   app: firebase.app.App;
   requests: Requests;
 }> = (props) => {
   const composeEnhancers = compose;
-const storageService = new StorageService();
+  const storageService = new StorageService();
   const enhancer = composeEnhancers(
     applyMiddleware(
       thunk.withExtraArgument({
         uid: props.app.auth().currentUser!.uid,
         requests: props.requests,
-          storageService: storageService,
+        storageService: storageService,
       })
     )
   );
 
   const store = createStore<State, any, any, any>(reducer, enhancer);
   store.dispatch(setUserID(props.app.auth().currentUser!.uid));
-  store.dispatch(setTabs(storageService.getTabs()))
-    store.dispatch(selectTab(storageService.getCurrentTab()));
+  store.dispatch(setTabs(storageService.getTabs()));
+  store.dispatch(selectTab(storageService.getCurrentTab()));
 
   props.app
     .database()

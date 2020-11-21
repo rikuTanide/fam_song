@@ -7,10 +7,9 @@ import { State } from "../types/state";
 export type GetState = () => State;
 
 export class StorageService {
-
   public getTabs(): string[] {
     const tabsStr = window.localStorage.getItem("tabs");
-    if(!tabsStr) return [];
+    if (!tabsStr) return [];
     return JSON.parse(tabsStr);
   }
 
@@ -31,7 +30,7 @@ export class StorageService {
 export interface ExternalArguments {
   requests: Requests;
   uid: string;
-  storageService: StorageService,
+  storageService: StorageService;
 }
 
 export type OnSelectTab = (artistID: string) => void;

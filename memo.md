@@ -1,5 +1,6 @@
 # やること
 
+- webpack
 - タブの保存
 - 閉じるボタン
 - デザインをちゃんとする
@@ -10,3 +11,5 @@
   - Cloud FunctionsでHTTP
   - React
   - Cloud FunctionsからHTTP
+- domain
+- Twitter

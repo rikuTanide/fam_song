@@ -5,18 +5,10 @@ import * as ReactDOM from "react-dom";
 import { Requests } from "../update/frontend";
 
 export async function main() {
-  // const app = firebase.initializeApp(
-  //   await (await fetch("/__/firebase/init.json")).json()
-  // );
+  const app = firebase.initializeApp(
+    await (await fetch("/__/firebase/init.json")).json()
+  );
 
-  const app = firebase.initializeApp({
-    apiKey: "AIzaSyDvKOkLEocQ6TmRCZbkFgM11hkWKEwswsU",
-    authDomain: "fam-song.firebaseapp.com",
-    databaseURL: "https://fam-song.firebaseio.com",
-    messagingSenderId: "844377812032",
-    projectId: "fam-song",
-    storageBucket: "fam-song.appspot.com",
-  });
   app.auth().onAuthStateChanged(async (user) => {
     if (user) {
       const element = document.getElementById("react-root");
