@@ -4,6 +4,17 @@ import actionCreatorFactory from "typescript-fsa";
 import { Data, Users, Artists, Songs, Votes } from "../types/data";
 import { modeling } from "../mapping/modeling";
 
+export function logout() {
+  return async (
+    dispatch: Dispatch,
+    getState: GetState,
+    api: ExternalArguments
+  ) => {
+    api.logout();
+    window.location.reload();
+  };
+}
+
 export function updateUsers(users: Users) {
   return async (
     dispatch: Dispatch,

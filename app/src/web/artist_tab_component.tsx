@@ -24,12 +24,14 @@ export const ArtistTabComponent: React.FunctionComponent<
     onNewSongSubmit: OnNewSongSubmit;
     onVote: OnVote;
     onRemoveVote: OnRemoveVote;
-    onCloseTab: OnCloseTab,
+    onCloseTab: OnCloseTab;
   }
 > = (props) => (
   <div>
     <p className="text-right">
-      <Button variant="danger" onClick={()=>props.onCloseTab(props.artistID)}>×</Button>
+      <Button variant="danger" onClick={() => props.onCloseTab(props.artistID)}>
+        ×
+      </Button>
     </p>
     <h1>{props.name}</h1>
 

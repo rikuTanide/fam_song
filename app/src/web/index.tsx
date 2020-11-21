@@ -31,6 +31,7 @@ export interface ExternalArguments {
   requests: Requests;
   uid: string;
   storageService: StorageService;
+  logout: () => void;
 }
 
 export type OnSelectTab = (artistID: string) => void;

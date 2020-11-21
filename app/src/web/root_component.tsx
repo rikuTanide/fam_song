@@ -34,6 +34,7 @@ export const RootComponent: React.SFC<{
         uid: props.app.auth().currentUser!.uid,
         requests: props.requests,
         storageService: storageService,
+        logout: () => props.app.auth().signOut(),
       })
     )
   );

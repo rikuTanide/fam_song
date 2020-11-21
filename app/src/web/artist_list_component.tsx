@@ -1,5 +1,13 @@
 import * as React from "react";
-import { Badge, Button, Card, Form, ListGroup, Spinner } from "react-bootstrap";
+import {
+  Badge,
+  Button,
+  Card,
+  Form,
+  InputGroup,
+  ListGroup,
+  Spinner,
+} from "react-bootstrap";
 import { OnNewArtistNameInput, OnNewArtistSubmit, OnSelectTab } from "./index";
 import { NotVotedArtistProps, VotedArtistProps } from "../types/props";
 
@@ -14,9 +22,11 @@ export const ArtistListComponent: React.SFC<{
   onSelectTab: OnSelectTab;
 }> = (props) => (
   <div>
-    <Card>
-      <Card.Body>
+    <Card className="m-2 mt-5">
+      <Card.Header>
         <Card.Title>投票しよう</Card.Title>
+      </Card.Header>
+      <Card.Body>
         <ListGroup>
           {props.notVotedArtists.map((a) => (
             <ListGroup.Item
@@ -31,9 +41,12 @@ export const ArtistListComponent: React.SFC<{
       </Card.Body>
     </Card>
 
-    <Card>
-      <Card.Body>
+    <Card className="m-2 mt-5">
+      <Card.Header>
         <Card.Title>投票したアーティスト</Card.Title>
+      </Card.Header>
+
+      <Card.Body>
         <ListGroup>
           {props.votedArtists.map((a) => (
             <ListGroup.Item
@@ -47,32 +60,43 @@ export const ArtistListComponent: React.SFC<{
         </ListGroup>
       </Card.Body>
     </Card>
-
     <Form.Group>
-      <Form.Label>追加するアーティスト名</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder="アーティスト名"
-        value={props.newArtistName}
-        onChange={(e: any) => props.onNewArtistNameInput(e.target.value)}
-        disabled={props.loading ? "disabled" : ""}
-      />
+      <Card className="m-2 mt-5">
+        <Card.Header>
+          <Card.Title>
+            <Form.Label>アーティストを登録</Form.Label>
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <Form.Group>
+            <Form.Label>アーティスト名</Form.Label>
+            <Form.Control
+              type="text"
+              value={props.newArtistName}
+              onChange={(e: any) => props.onNewArtistNameInput(e.target.value)}
+              disabled={props.loading ? "disabled" : ""}
+            />
+          </Form.Group>
+        </Card.Body>
+        <Card.Footer className="text-muted">
+          <Button
+            disabled={!props.enable}
+            variant="primary"
+            type="submit"
+            onClick={() => {
+              props.onNewArtistSubmit();
+              return false;
+            }}
+          >
+            追加
+          </Button>
+          {props.loading ? (
+            <Spinner animation="border" variant="primary" size="sm" />
+          ) : (
+            ""
+          )}
+        </Card.Footer>
+      </Card>
     </Form.Group>
-    <Button
-      disabled={!props.enable}
-      variant="primary"
-      type="submit"
-      onClick={() => {
-        props.onNewArtistSubmit();
-        return false;
-      }}
-    >
-      追加
-    </Button>
-    {props.loading ? (
-      <Spinner animation="border" variant="primary" size="sm" />
-    ) : (
-      ""
-    )}
   </div>
 );
