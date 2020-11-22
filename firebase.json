@@ -28,6 +28,10 @@
         "destination": "/mypage/index.html"
       },
       {
+        "source": "/favicon.ico",
+        "destination": "/mypage/favicon.ico"
+      },
+      {
         "source": "/",
         "function": "httpHandle"
       },

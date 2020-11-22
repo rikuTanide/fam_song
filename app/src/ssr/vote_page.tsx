@@ -20,7 +20,11 @@ export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
         crossOrigin="anonymous"
       />
-
+      <script
+        src="https://kit.fontawesome.com/6b7991403e.js"
+        crossOrigin="anonymous"
+      />
+      <link rel="stylesheet" href="bootstrap-social.css" />
       <title>代表曲は？</title>
     </head>
     <body>

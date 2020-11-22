@@ -7,10 +7,25 @@ import { Data, User } from "./types/data";
 import { modeling } from "./mapping/modeling";
 import { server } from "./server/app";
 import { PATH_USERS } from "./values";
+import * as express from "express";
+import { createICache } from "./server/icatch";
 
 admin.initializeApp();
 
 export const httpHandle = functions.https.onRequest(server());
+
+export const iCatch = functions
+  .runWith({
+    memory: "1GB",
+  })
+  .https.onRequest(async (req: express.Request, res: express.Response) => {
+    const userName = req.query["user_name"] as string;
+    const artistName = req.query["artist_name"] as string;
+    const songName = req.query["song_name"] as string;
+    const buffer = await createICache(userName, artistName, songName);
+    res.write(buffer);
+    res.end();
+  });
 
 class FirebaseServiceImple implements FirebaseService {
   constructor(private ref: admin.database.Reference) {}
