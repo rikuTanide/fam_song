@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ArtistTabProps } from "../types/props";
+import { ArtistTabProps, ShareProps } from "../types/props";
 import {
   Badge,
   Card,
@@ -101,5 +101,25 @@ export const ArtistTabComponent: React.FunctionComponent<
         )}
       </Card.Footer>
     </Card>
+
+    {props.share ? <ShareComponent {...props.share} /> : ""}
   </div>
+);
+
+export const ShareComponent: React.FunctionComponent<ShareProps> = (props) => (
+  <Card className="my-5 mx-2 shadow-sm">
+    <Card.Header>
+      <Card.Title>シェアする</Card.Title>
+    </Card.Header>
+    <Card.Body>
+      <a
+        href={props.url}
+        className="fa fa-twitter"
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+      >
+        Twitterでつぶやく
+      </a>
+    </Card.Body>
+  </Card>
 );

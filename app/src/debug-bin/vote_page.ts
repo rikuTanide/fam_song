@@ -13,6 +13,7 @@ function main() {
     songID: "1",
     songName: "TSUNAMI",
     userID: "1",
+    share: {url: ""},
   };
   const html = renderVotePage(props);
   process.stdout.write(html);

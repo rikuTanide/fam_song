@@ -4,6 +4,7 @@ import {
   ArtistTabProps,
   MyPageProps,
   NotVotedArtistProps,
+  ShareProps,
   SongOptionProps,
   SongPageProps,
   SongProps,
@@ -17,6 +18,7 @@ import {
 import { State } from "../types/state";
 import { modeling } from "./modeling";
 import { Data } from "../types/data";
+import { Models } from "../types/model";
 
 export function toTopPageProps(data: Data): TopPageProps {
   const model = modeling(data);
@@ -162,6 +164,7 @@ export function toVotePageProps(
     songName: songName,
     userID: userID,
     userName: userName,
+    share: mapShare(model, userID, artistID)!,
   };
 }
 
@@ -192,7 +195,7 @@ export function toMyPageProps(state: State): MyPageProps {
         );
       const newSong =
         myPageState.newSongs.find((a) => a.artistID == aid)?.newSong || "";
-
+      const share = mapShare(model, myPageState.userID, aid);
       return {
         artistID: aid,
         name: artistName,
@@ -201,6 +204,7 @@ export function toMyPageProps(state: State): MyPageProps {
         submitEnable: newSong.trim().length > 0,
         loading: myPageState.loading,
         selected: !!model.votes.find(myPageState.userID, aid),
+        share: share,
       };
     });
 
@@ -238,5 +242,26 @@ export function toMyPageProps(state: State): MyPageProps {
     votedArtists: votedArtists,
     notVotedArtists: notVotedArtists,
     loading: myPageState.loading,
+  };
+}
+
+function mapShare(
+  model: Models,
+  userID: string,
+  artistID: string
+): ShareProps | undefined {
+  const songID = model.votes.find(userID, artistID);
+  const artistName = model.artists.get(artistID)?.name || "";
+  if (!songID) return;
+  const homeUrl = "https://fam-song.web.app/";
+  const songName = model.songs.get(artistID, songID)?.name || "";
+  const name = model.users.get(userID)?.name || "";
+  const message = `${name}さんは${artistName}の代表曲は${songName}だと主張しています。\n`;
+  const url = new URL("https://twitter.com/intent/tweet");
+  url.searchParams.set("text", message);
+  url.searchParams.set("url", homeUrl);
+  url.searchParams.set("hashtags", "アーティストの代表曲は");
+  return {
+    url: url.toString(),
   };
 }

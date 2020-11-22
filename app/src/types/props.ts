@@ -58,6 +58,7 @@ export interface VotePageProps {
   artistName: string;
   songID: string;
   songName: string;
+  share: ShareProps;
 }
 
 export interface MyPageProps {
@@ -92,10 +93,16 @@ export interface ArtistTabProps {
   submitEnable: boolean;
   loading: boolean;
   selected: boolean;
+
+  share?: ShareProps;
 }
 
 export interface SongOptionProps {
   songID: string;
   songName: string;
   selected: boolean;
+}
+
+export interface ShareProps {
+  url: string;
 }
