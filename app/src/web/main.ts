@@ -4,6 +4,7 @@ import { RootComponent } from "./root_component";
 import * as ReactDOM from "react-dom";
 import { Requests } from "../update/frontend";
 import { LoginComponent } from "./login_component";
+import { User } from "../types/data";
 
 export async function main() {
   const app = firebase.initializeApp(
@@ -19,7 +20,6 @@ export async function main() {
         requests: req,
       });
       ReactDOM.render(rootElement, element);
-      req.putUser(user.uid);
     } else {
       const callback = () => {
         const provider = new firebase.auth.TwitterAuthProvider();
@@ -28,7 +28,13 @@ export async function main() {
           .auth()
           .signInWithPopup(provider)
           .then((result) => {
-            window.location.reload();
+            const req = new Requests(app);
+            const user: User = {
+              name: result.additionalUserInfo?.username || "",
+              img: result.user?.photoURL || "",
+            };
+            req.putUser(result.user?.uid || "", user);
+            // window.location.reload();
           });
         return false;
       };

@@ -6,7 +6,6 @@ import * as admin from "firebase-admin";
 import { Data, User } from "./types/data";
 import { modeling } from "./mapping/modeling";
 import { server } from "./server/app";
-import { PATH_USERS } from "./values";
 import * as express from "express";
 import { createICache } from "./server/icatch";
 
@@ -74,7 +73,7 @@ async function readData(snapshot: DataSnapshot): Promise<Data> {
 }
 
 async function onCreate(snapshot: DataSnapshot) {
-  const req = await injectUserInfo(snapshot.val() as Request);
+  const req = snapshot.val() as Request;
   const requestID = snapshot.key;
   const fs = new FirebaseServiceImple(snapshot.ref.root);
   const data = await readData(snapshot);
@@ -82,21 +81,4 @@ async function onCreate(snapshot: DataSnapshot) {
   const res = update(fs, model, req, requestID);
   const userID = req.userID;
   snapshot.ref.root.child(`responses/${userID}`).push(res);
-}
-
-async function injectUserInfo(org: Request): Promise<Request> {
-  if (org.path != PATH_USERS) return org;
-  const userID = org.userID || "";
-  const user = await admin.auth().getUser(userID);
-  const twitterName = user.displayName || "";
-  const img = user.photoURL || "";
-  const u: User = {
-    img: img,
-    name: twitterName,
-  };
-  const req: Request = {
-    ...org,
-    payload: u,
-  };
-  return req;
 }

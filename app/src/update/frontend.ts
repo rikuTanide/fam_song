@@ -23,12 +23,12 @@ export class Requests {
       });
   }
 
-  public putUser(userID: string) {
+  public putUser(userID: string, user: User) {
     const req: Request = {
       method: "PUT",
       params: { userID: userID },
       path: PATH_USERS,
-      payload: null,
+      payload: user,
       userID: this.app.auth().currentUser!.uid,
     };
     this.push(req);

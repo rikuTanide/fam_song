@@ -28,7 +28,7 @@ export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@isyumi_net" />
       <meta property="og:url" content={props.ogUrl} />
-      <meta property="og:title" content={props.ogTitle} />
+      <meta property="og:title" content="あのアーティストの代表曲は？" />
       <meta property="og:description" content={props.ogTitle} />
       <meta property="og:image" content={props.ogICatch} />
       <title>代表曲は？</title>
