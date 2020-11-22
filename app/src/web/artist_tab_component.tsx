@@ -103,6 +103,7 @@ export const ArtistTabComponent: React.FunctionComponent<
     </Card>
 
     {props.share ? <ShareComponent {...props.share} /> : ""}
+    {props.icacheUrl ? <img src={props.icacheUrl} width="1" /> : ""}
   </div>
 );
 

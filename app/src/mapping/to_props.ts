@@ -158,13 +158,10 @@ export function toVotePageProps(
   const user = model.users.get(userID);
   const userName = user?.name || "";
   const ogUrl = createVoteUrl(userID, artistID);
-  const ogICatch = new URL("https://famous-song.app/icache");
-  ogICatch.searchParams.set("user_name", userName);
-  ogICatch.searchParams.set("artist_name", artistName);
-  ogICatch.searchParams.set("song_name", songName);
-  const ogTitle = `${userName}さんが${artistName}の代表曲は${songName}だと主張しています。`;
+  const ogICatch = createICacheUrl(userName, artistName, songName);
+    const ogTitle = `${userName}さんが${artistName}の代表曲は${songName}だと主張しています。`;
 
-  return {
+    return {
     artistID: artistID,
     artistName: artistName,
     songID: songID || "",
@@ -206,6 +203,10 @@ export function toMyPageProps(state: State): MyPageProps {
       const newSong =
         myPageState.newSongs.find((a) => a.artistID == aid)?.newSong || "";
       const share = mapShare(model, myPageState.userID, aid);
+        const userName = user?.name||"";
+        const voteSongID = model.votes.find(myPageState.userID, aid);
+        const songName = voteSongID ?  model.songs.get(aid, voteSongID )?.name  || "" : "";
+
       return {
         artistID: aid,
         name: artistName,
@@ -213,8 +214,9 @@ export function toMyPageProps(state: State): MyPageProps {
         newSong: newSong,
         submitEnable: newSong.trim().length > 0,
         loading: myPageState.loading,
-        selected: !!model.votes.find(myPageState.userID, aid),
+        selected: !!voteSongID,
         share: share,
+          icacheUrl: voteSongID ? createICacheUrl(userName,artistName, songName ) : undefined
       };
     });
 
@@ -242,6 +244,7 @@ export function toMyPageProps(state: State): MyPageProps {
       };
     }
   );
+
 
   return {
     img: user?.img || "",
@@ -278,4 +281,12 @@ function mapShare(
 
 function createVoteUrl(userID: string, artistID: string): string {
   return `https://famous-song.app/votes/users/${userID}/artists/${artistID}`;
+}
+
+function createICacheUrl(userName: string,artistName: string, songName: string) : string{
+    const ogICatch = new URL("https://famous-song.app/icache");
+    ogICatch.searchParams.set("user_name", userName);
+    ogICatch.searchParams.set("artist_name", artistName);
+    ogICatch.searchParams.set("song_name", songName);
+    return ogICatch.toString();
 }
