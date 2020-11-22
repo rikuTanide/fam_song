@@ -3,6 +3,7 @@ import * as React from "react";
 import { RootComponent } from "./root_component";
 import * as ReactDOM from "react-dom";
 import { Requests } from "../update/frontend";
+import { LoginComponent } from "./login_component";
 
 export async function main() {
   const app = firebase.initializeApp(
@@ -20,8 +21,7 @@ export async function main() {
       ReactDOM.render(rootElement, element);
       req.putUser(user.uid);
     } else {
-      const button = document.createElement("button");
-      button.addEventListener("click", () => {
+      const callback = () => {
         const provider = new firebase.auth.TwitterAuthProvider();
         provider.setCustomParameters({ prompt: "consent" });
         void app
@@ -30,9 +30,14 @@ export async function main() {
           .then((result) => {
             window.location.reload();
           });
+        return false;
+      };
+
+      const element = document.getElementById("react-root");
+      const rootElement = React.createElement(LoginComponent, {
+        callback: callback,
       });
-      button.textContent = "ログイン";
-      document.body.appendChild(button);
+      ReactDOM.render(rootElement, element);
     }
   });
 }

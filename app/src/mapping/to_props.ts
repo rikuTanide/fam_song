@@ -253,10 +253,10 @@ function mapShare(
   const songID = model.votes.find(userID, artistID);
   const artistName = model.artists.get(artistID)?.name || "";
   if (!songID) return;
-  const homeUrl = "https://fam-song.web.app/";
+  const homeUrl = "https://famous-song.app/";
   const songName = model.songs.get(artistID, songID)?.name || "";
   const name = model.users.get(userID)?.name || "";
-  const message = `${name}さんは${artistName}の代表曲は${songName}だと主張しています。\n`;
+  const message = `${name}さんは\n${artistName}の代表曲は『${songName}』だと主張しています。\n`;
   const url = new URL("https://twitter.com/intent/tweet");
   url.searchParams.set("text", message);
   url.searchParams.set("url", homeUrl);

@@ -114,10 +114,11 @@ export const ShareComponent: React.FunctionComponent<ShareProps> = (props) => (
     <Card.Body>
       <a
         href={props.url}
-        className="fa fa-twitter"
+        className="btn btn-block btn-social btn-twitter"
         target="_blank"
         rel="nofollow noopener noreferrer"
       >
+        <span className="fa fa-twitter" />
         Twitterでつぶやく
       </a>
     </Card.Body>
