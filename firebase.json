@@ -13,8 +13,28 @@
     ],
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/mypage/**",
+        "destination": "/mypage/index.html"
+      },
+      {
+        "source": "/",
+        "function": "httpHandle"
+      },
+      {
+        "source": "/artists/*",
+        "function": "httpHandle"
+      },
+      {
+        "source": "/artists/*/songs/*",
+        "function": "httpHandle"
+      },
+      {
+        "source": "/users/*",
+        "function": "httpHandle"
+      },
+      {
+        "source": "/votes/users/*/artists/*",
+        "function": "httpHandle"
       }
     ]
   },

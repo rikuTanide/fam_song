@@ -1,8 +1,7 @@
 import * as React from "react";
-import { ArtistPageProps, SongPageProps, TopPageProps } from "../types/props";
-import { Badge, Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
+import { SongPageProps } from "../types/props";
+import { Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
 import { renderToStaticMarkup } from "react-dom/server";
-import { ArtistPageComponent } from "./artist_page";
 
 export function renderSongPage(props: SongPageProps): string {
   return renderToStaticMarkup(<SongPageComponent {...props} />);

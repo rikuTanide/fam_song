@@ -1,8 +1,8 @@
 import * as React from "react";
-import { TopPageProps, UserPageProps, VotePageProps } from "../types/props";
-import { Badge, Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
+import { VotePageProps } from "../types/props";
+import { Breadcrumb, Card, Jumbotron } from "react-bootstrap";
 import { renderToStaticMarkup } from "react-dom/server";
-import { UserPageComponent } from "./user_page";
+
 export function renderVotePage(props: VotePageProps): string {
   return renderToStaticMarkup(<VotePageComponent {...props} />);
 }
