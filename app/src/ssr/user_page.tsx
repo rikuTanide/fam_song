@@ -2,6 +2,7 @@ import * as React from "react";
 import { UserPageProps } from "../types/props";
 import { Breadcrumb, Card, Jumbotron } from "react-bootstrap";
 import { renderToStaticMarkup } from "react-dom/server";
+import { TrackingTagComponent } from "./artist_page";
 
 export function renderUserPage(props: UserPageProps): string {
   return renderToStaticMarkup(<UserPageComponent {...props} />);
@@ -67,6 +68,7 @@ export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
           ))}
         </Card.Body>
       </Card>
+      <TrackingTagComponent />
     </body>
   </html>
 );

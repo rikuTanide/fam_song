@@ -2,6 +2,7 @@ import * as React from "react";
 import { SongPageProps } from "../types/props";
 import { Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
 import { renderToStaticMarkup } from "react-dom/server";
+import { TrackingTagComponent } from "./artist_page";
 
 export function renderSongPage(props: SongPageProps): string {
   return renderToStaticMarkup(<SongPageComponent {...props} />);
@@ -66,6 +67,7 @@ export const SongPageComponent: React.FunctionComponent<SongPageProps> = (
           </ListGroup>
         </Card.Body>
       </Card>
+      <TrackingTagComponent />
     </body>
   </html>
 );

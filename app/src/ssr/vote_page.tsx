@@ -3,6 +3,7 @@ import { VotePageProps } from "../types/props";
 import { Breadcrumb, Card, Jumbotron } from "react-bootstrap";
 import { renderToStaticMarkup } from "react-dom/server";
 import { ShareComponent } from "../web/artist_tab_component";
+import { TrackingTagComponent } from "./artist_page";
 
 export function renderVotePage(props: VotePageProps): string {
   return renderToStaticMarkup(<VotePageComponent {...props} />);
@@ -84,6 +85,7 @@ export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
         <Card.Footer>と主張しています。</Card.Footer>
       </Card>
       <ShareComponent {...props.share} />
+      <TrackingTagComponent />
     </body>
   </html>
 );

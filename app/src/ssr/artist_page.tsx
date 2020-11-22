@@ -61,6 +61,26 @@ export const ArtistPageComponent: React.FunctionComponent<ArtistPageProps> = (
           </ListGroup>
         </Card.Body>
       </Card>
+      <TrackingTagComponent />
     </body>
   </html>
+);
+
+export const TrackingTagComponent: React.FunctionComponent = (props) => (
+  <>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-LVV7EBWX97"
+    ></script>
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LVV7EBWX97');
+`,
+      }}
+    ></script>
+  </>
 );

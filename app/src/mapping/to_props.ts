@@ -159,9 +159,9 @@ export function toVotePageProps(
   const userName = user?.name || "";
   const ogUrl = createVoteUrl(userID, artistID);
   const ogICatch = createICacheUrl(userName, artistName, songName);
-    const ogTitle = `${userName}さんが${artistName}の代表曲は${songName}だと主張しています。`;
+  const ogTitle = `${userName}さんが${artistName}の代表曲は${songName}だと主張しています。`;
 
-    return {
+  return {
     artistID: artistID,
     artistName: artistName,
     songID: songID || "",
@@ -203,9 +203,11 @@ export function toMyPageProps(state: State): MyPageProps {
       const newSong =
         myPageState.newSongs.find((a) => a.artistID == aid)?.newSong || "";
       const share = mapShare(model, myPageState.userID, aid);
-        const userName = user?.name||"";
-        const voteSongID = model.votes.find(myPageState.userID, aid);
-        const songName = voteSongID ?  model.songs.get(aid, voteSongID )?.name  || "" : "";
+      const userName = user?.name || "";
+      const voteSongID = model.votes.find(myPageState.userID, aid);
+      const songName = voteSongID
+        ? model.songs.get(aid, voteSongID)?.name || ""
+        : "";
 
       return {
         artistID: aid,
@@ -216,7 +218,9 @@ export function toMyPageProps(state: State): MyPageProps {
         loading: myPageState.loading,
         selected: !!voteSongID,
         share: share,
-          icacheUrl: voteSongID ? createICacheUrl(userName,artistName, songName ) : undefined
+        icacheUrl: voteSongID
+          ? createICacheUrl(userName, artistName, songName)
+          : undefined,
       };
     });
 
@@ -244,7 +248,6 @@ export function toMyPageProps(state: State): MyPageProps {
       };
     }
   );
-
 
   return {
     img: user?.img || "",
@@ -283,10 +286,14 @@ function createVoteUrl(userID: string, artistID: string): string {
   return `https://famous-song.app/votes/users/${userID}/artists/${artistID}`;
 }
 
-function createICacheUrl(userName: string,artistName: string, songName: string) : string{
-    const ogICatch = new URL("https://famous-song.app/icache");
-    ogICatch.searchParams.set("user_name", userName);
-    ogICatch.searchParams.set("artist_name", artistName);
-    ogICatch.searchParams.set("song_name", songName);
-    return ogICatch.toString();
+function createICacheUrl(
+  userName: string,
+  artistName: string,
+  songName: string
+): string {
+  const ogICatch = new URL("https://famous-song.app/icache");
+  ogICatch.searchParams.set("user_name", userName);
+  ogICatch.searchParams.set("artist_name", artistName);
+  ogICatch.searchParams.set("song_name", songName);
+  return ogICatch.toString();
 }

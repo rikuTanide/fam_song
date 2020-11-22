@@ -2,6 +2,7 @@ import * as React from "react";
 import { TopPageProps } from "../types/props";
 import { Badge, Card, Jumbotron } from "react-bootstrap";
 import { renderToStaticMarkup } from "react-dom/server";
+import { TrackingTagComponent } from "./artist_page";
 
 export function renderTopPage(props: TopPageProps): string {
   return renderToStaticMarkup(<TopPageComponent {...props} />);
@@ -58,6 +59,7 @@ export const TopPageComponent: React.FunctionComponent<TopPageProps> = (
           ))}
         </Card.Body>
       </Card>
+      <TrackingTagComponent />
     </body>
   </html>
 );
