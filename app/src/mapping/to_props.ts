@@ -90,14 +90,12 @@ export function toSongPageProps(
           userID: uid,
           img: user.img,
           twitterName: user.name,
-          twitterScreenName: user.screenName,
         };
       } else {
         return {
           userID: uid,
           img: "",
           twitterName: "",
-          twitterScreenName: "",
         };
       }
     });
@@ -138,7 +136,7 @@ export function toUserPageProps(data: Data, userID: string): UserPageProps {
   return {
     userID: userID,
     userName: user?.name || "",
-    userScreenName: user?.screenName || "",
+    userImg: user?.img || "",
     voteSongs: voteSongs,
   };
 }
@@ -157,7 +155,6 @@ export function toVotePageProps(
     (songID ? model.songs.get(artistID, songID)?.name : undefined) || "";
   const user = model.users.get(userID);
   const userName = user?.name || "";
-  const userScreenName = user?.screenName || "";
   return {
     artistID: artistID,
     artistName: artistName,
@@ -165,7 +162,6 @@ export function toVotePageProps(
     songName: songName,
     userID: userID,
     userName: userName,
-    userScreenName: userScreenName,
   };
 }
 

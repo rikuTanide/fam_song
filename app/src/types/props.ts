@@ -34,14 +34,13 @@ export interface SongPageProps {
 export interface VoteUserProps {
   userID: string;
   twitterName: string;
-  twitterScreenName: string;
   img: string;
 }
 
 export interface UserPageProps {
   userID: string;
   userName: string;
-  userScreenName: string;
+  userImg: string;
   voteSongs: VoteSongProps[];
 }
 
@@ -55,7 +54,6 @@ export interface VoteSongProps {
 export interface VotePageProps {
   userID: string;
   userName: string;
-  userScreenName: string;
   artistID: string;
   artistName: string;
   songID: string;

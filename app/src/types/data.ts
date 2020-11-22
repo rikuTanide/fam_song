@@ -8,7 +8,6 @@ export interface Artist {
 
 export interface User {
   name: string;
-  screenName: string;
   img: string;
 }
 

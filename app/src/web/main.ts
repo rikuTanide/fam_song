@@ -18,17 +18,17 @@ export async function main() {
         requests: req,
       });
       ReactDOM.render(rootElement, element);
+      req.putUser(user.uid);
     } else {
       const button = document.createElement("button");
       button.addEventListener("click", () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
+        const provider = new firebase.auth.TwitterAuthProvider();
         provider.setCustomParameters({ prompt: "consent" });
         void app
           .auth()
           .signInWithPopup(provider)
           .then((result) => {
-            console.log(result.additionalUserInfo);
-            return window.location.reload();
+            window.location.reload();
           });
       });
       button.textContent = "ログイン";

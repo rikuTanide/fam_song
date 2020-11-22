@@ -13,19 +13,16 @@ function main() {
       {
         userID: "1",
         twitterName: "@isyumi_net",
-        twitterScreenName: "弩.net",
         img: imgUrl,
       },
       {
         userID: "1",
         twitterName: "@isyumi_net",
-        twitterScreenName: "弩.net",
         img: imgUrl,
       },
       {
         userID: "1",
         twitterName: "@isyumi_net",
-        twitterScreenName: "弩.net",
         img: imgUrl,
       },
     ],

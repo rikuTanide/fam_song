@@ -2,12 +2,13 @@ import * as React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { UserPageProps } from "../types/props";
 import { renderUserPage, UserPageComponent } from "../ssr/user_page";
+import { imgUrl } from "../web/my_page_top";
 
 function main() {
   const props: UserPageProps = {
     userID: "1",
     userName: "@isyumi_net",
-    userScreenName: "弩.net",
+    userImg: imgUrl,
     voteSongs: [
       {
         songID: "1",

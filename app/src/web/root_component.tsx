@@ -1,24 +1,13 @@
 import * as React from "react";
-import { Tabs } from "react-bootstrap";
-import { connect, Provider } from "react-redux";
-import { toMyPageProps } from "../mapping/to_props";
-import * as actions from "./actions";
-import {
-  bindActionCreators,
-  createStore,
-  compose,
-  applyMiddleware,
-} from "redux";
-import { ArtistTabProps, MyPageProps } from "../types/props";
-import { ArtistListComponent } from "./artist_list_component";
-import { ArtistTabComponent } from "./artist_tab_component";
+import { Provider } from "react-redux";
+import { dataUpdate, selectTab, setTabs, setUserID } from "./actions";
+import { applyMiddleware, compose, createStore } from "redux";
 import { State } from "../types/state";
 import { reducer } from "./reducer";
 import thunk from "redux-thunk";
 import firebase from "firebase";
 import { MyPageTopComponent } from "./my_page_top";
 import { Requests } from "../update/frontend";
-import { dataUpdate, selectTab, setTabs, setUserID } from "./actions";
 import { Data } from "../types/data";
 import { StorageService } from "./index";
 

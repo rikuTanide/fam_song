@@ -27,10 +27,7 @@ export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
         <h1>代表曲は？</h1>
         <p className="lead">あなたが思うアーティストの代表曲を教えてください</p>
         <hr className="my-4" />
-        <p>
-          {props.userScreenName}
-          {props.userName}さんとは気が合いそうかな？
-        </p>
+        <p>{props.userName}さんとは気が合いそうかな？</p>
         <a className="btn btn-primary btn-lg" href="/mypage">
           投票する
         </a>
@@ -39,7 +36,6 @@ export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
       <Breadcrumb className="m-5">
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         <Breadcrumb.Item href={`/users/${props.userID}`}>
-          {props.userScreenName}
           {props.userName}
         </Breadcrumb.Item>
       </Breadcrumb>
@@ -47,7 +43,7 @@ export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
       <Card className="m-5">
         <Card.Header>
           <Card.Title>
-            {props.userScreenName}
+            <img src={props.userImg} width={30} />
             {props.userName}さんの投票
           </Card.Title>
         </Card.Header>

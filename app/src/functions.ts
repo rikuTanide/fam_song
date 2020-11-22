@@ -1,15 +1,15 @@
 import * as functions from "firebase-functions";
 import { DataSnapshot } from "firebase-functions/lib/providers/database";
-import { Request, Response } from "./types/request_type";
+import { Request } from "./types/request_type";
 import { FirebaseService, update } from "./update/server";
 import * as admin from "firebase-admin";
-import { Data } from "./types/data";
+import { Data, User } from "./types/data";
 import { modeling } from "./mapping/modeling";
 import { server } from "./server/app";
+import { PATH_USERS } from "./values";
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
+admin.initializeApp();
+
 export const httpHandle = functions.https.onRequest(server());
 
 class FirebaseServiceImple implements FirebaseService {
@@ -58,7 +58,7 @@ async function readData(snapshot: DataSnapshot): Promise<Data> {
 }
 
 async function onCreate(snapshot: DataSnapshot) {
-  const req = snapshot.val() as Request;
+  const req = await injectUserInfo(snapshot.val() as Request);
   const requestID = snapshot.key;
   const fs = new FirebaseServiceImple(snapshot.ref.root);
   const data = await readData(snapshot);
@@ -66,4 +66,21 @@ async function onCreate(snapshot: DataSnapshot) {
   const res = update(fs, model, req, requestID);
   const userID = req.userID;
   snapshot.ref.root.child(`responses/${userID}`).push(res);
+}
+
+async function injectUserInfo(org: Request): Promise<Request> {
+  if (org.path != PATH_USERS) return org;
+  const userID = org.userID || "";
+  const user = await admin.auth().getUser(userID);
+  const twitterName = user.displayName || "";
+  const img = user.photoURL || "";
+  const u: User = {
+    img: img,
+    name: twitterName,
+  };
+  const req: Request = {
+    ...org,
+    payload: u,
+  };
+  return req;
 }

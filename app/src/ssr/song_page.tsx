@@ -59,7 +59,6 @@ export const SongPageComponent: React.FunctionComponent<SongPageProps> = (
                   href={`/votes/users/${u.userID}/artists/${props.artistID}`}
                 >
                   <img className="img-thumbnail" src={u.img} width={30} />
-                  {u.twitterScreenName}
                   {u.twitterName}
                 </a>
               </ListGroup.Item>

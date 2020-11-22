@@ -27,10 +27,7 @@ export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
         <h1>代表曲は？</h1>
         <p className="lead">あなたが思うアーティストの代表曲を教えてください</p>
         <hr className="my-4" />
-        <p>
-          {props.userScreenName}
-          {props.userName}さんとは気が合いそうかな？
-        </p>
+        <p>{props.userName}さんとは気が合いそうかな？</p>
         <a className="btn btn-primary btn-lg" href="/mypage">
           投票する
         </a>
@@ -47,7 +44,6 @@ export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
           {props.songName}
         </Breadcrumb.Item>
         <Breadcrumb.Item href={`/users/${props.userID}`}>
-          {props.userScreenName}
           {props.userName}
         </Breadcrumb.Item>
       </Breadcrumb>
@@ -56,7 +52,6 @@ export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
         <Card.Header>
           <Card.Subtitle>
             <a className="text-dark" href={`/users/${props.userID}`}>
-              {props.userScreenName}
               {props.userName}さんは
             </a>
           </Card.Subtitle>

@@ -8,7 +8,6 @@ import { renderVotePage, VotePageComponent } from "../ssr/vote_page";
 function main() {
   const props: VotePageProps = {
     userName: "@isyumi_net",
-    userScreenName: "弩.net",
     artistID: "1",
     artistName: "サザンオールスターズ",
     songID: "1",
