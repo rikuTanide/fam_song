@@ -41,8 +41,19 @@ export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
         <Card.Body>
           {props.voteSongs.map((s) => (
             <Card key={s.artistID} className="mb-2">
-              <Card.Header>{s.artistName}</Card.Header>
-              <Card.Body>{s.songName}</Card.Body>
+              <Card.Header>
+                <a className="text-dark" href={`/artists/${s.artistID}`}>
+                  {s.artistName}
+                </a>
+              </Card.Header>
+              <Card.Body>
+                <a
+                  className="text-dark"
+                  href={`/artists/${s.artistID}/songs/${s.songID}`}
+                >
+                  {s.songName}
+                </a>
+              </Card.Body>
             </Card>
           ))}
         </Card.Body>

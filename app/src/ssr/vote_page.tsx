@@ -34,13 +34,24 @@ export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
       <Card className="m-5">
         <Card.Header>
           <Card.Subtitle>
-            {props.userScreenName}
-            {props.userName}さんは
+            <a className="text-dark" href={`/users/${props.userID}`}>
+              {props.userScreenName}
+              {props.userName}さんは
+            </a>
           </Card.Subtitle>
         </Card.Header>
         <Card.Body>
           <Card.Title>
-            {props.artistName}の代表曲は{props.songName}
+            <a className="text-dark" href={`/artists/${props.artistID}`}>
+              {props.artistName}
+            </a>
+            の代表曲は
+            <a
+              className="text-dark"
+              href={`/artists/${props.artistID}/songs/${props.songID}`}
+            >
+              {props.songName}
+            </a>
           </Card.Title>
         </Card.Body>
         <Card.Footer>と主張しています。</Card.Footer>

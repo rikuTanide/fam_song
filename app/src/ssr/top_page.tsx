@@ -35,10 +35,19 @@ export const TopPageComponent: React.FunctionComponent<TopPageProps> = (
         <Card.Body>
           {props.artists.map((a) => (
             <Card key={a.artistID} className="mb-2">
-              <Card.Header>{a.name}</Card.Header>
+              <Card.Header>
+                <a className="text-dark" href={`/artists/${a.artistID}`}>
+                  {a.name}
+                </a>
+              </Card.Header>
               <Card.Body>
-                {a.topSongName}
-                <Badge variant="danger">{a.count}</Badge>
+                <a
+                  className="text-dark"
+                  href={`/artists/${a.artistID}/songs/${a.topSongID}`}
+                >
+                  {a.topSongName}
+                  <Badge variant="danger">{a.count}</Badge>
+                </a>
               </Card.Body>
             </Card>
           ))}

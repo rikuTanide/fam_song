@@ -38,9 +38,11 @@ export const SongPageComponent: React.FunctionComponent<SongPageProps> = (
           <ListGroup>
             {props.voteUsers.map((u) => (
               <ListGroup.Item key={u.userID}>
-                <img className="img-thumbnail" src={u.img} width={30} />
-                {u.twitterScreenName}
-                {u.twitterName}
+                <a className="text-dark" href={`/users/${u.userID}`}>
+                  <img className="img-thumbnail" src={u.img} width={30} />
+                  {u.twitterScreenName}
+                  {u.twitterName}
+                </a>
               </ListGroup.Item>
             ))}
           </ListGroup>

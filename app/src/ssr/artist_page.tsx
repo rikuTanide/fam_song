@@ -36,7 +36,12 @@ export const ArtistPageComponent: React.FunctionComponent<ArtistPageProps> = (
           <ListGroup>
             {props.songs.map((s) => (
               <ListGroup.Item key={s.songID}>
-                {s.name}
+                <a
+                  className="text-dark"
+                  href={`/artists/${props.artistID}/songs/${s.songID}`}
+                >
+                  {s.name}
+                </a>
                 <Badge variant="danger">{s.voteCount}</Badge>
               </ListGroup.Item>
             ))}
