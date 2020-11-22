@@ -11,6 +11,17 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=30"
+          }
+        ]
+      }
+    ],
     "rewrites": [
       {
         "source": "/mypage/**",
