@@ -23,6 +23,7 @@ export const iCatch = functions
     const artistName = req.query["artist_name"] as string;
     const songName = req.query["song_name"] as string;
     const buffer = await createICache(userName, artistName, songName);
+    res.header("cache-control", "public, max-age=1000");
     res.write(buffer);
     res.end();
   });

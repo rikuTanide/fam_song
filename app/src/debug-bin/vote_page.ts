@@ -10,6 +10,9 @@ function main() {
     songName: "TSUNAMI",
     userID: "1",
     share: { url: "" },
+    ogUrl: "",
+    ogTitle: "",
+    ogICatch: "",
   };
   const html = renderVotePage(props);
   process.stdout.write(html);

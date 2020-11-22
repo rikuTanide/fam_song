@@ -157,6 +157,13 @@ export function toVotePageProps(
     (songID ? model.songs.get(artistID, songID)?.name : undefined) || "";
   const user = model.users.get(userID);
   const userName = user?.name || "";
+  const ogUrl = createVoteUrl(userID, artistID);
+  const ogICatch = new URL("https://famous-song.app/icache");
+  ogICatch.searchParams.set("user_name", userName);
+  ogICatch.searchParams.set("artist_name", artistName);
+  ogICatch.searchParams.set("song_name", songName);
+  const ogTitle = `${userName}さんが${artistName}の代表曲は${songName}だと主張しています。`;
+
   return {
     artistID: artistID,
     artistName: artistName,
@@ -165,6 +172,9 @@ export function toVotePageProps(
     userID: userID,
     userName: userName,
     share: mapShare(model, userID, artistID)!,
+    ogICatch: ogICatch.toString(),
+    ogTitle: ogTitle,
+    ogUrl: ogUrl,
   };
 }
 
@@ -253,7 +263,7 @@ function mapShare(
   const songID = model.votes.find(userID, artistID);
   const artistName = model.artists.get(artistID)?.name || "";
   if (!songID) return;
-  const homeUrl = "https://famous-song.app/";
+  const homeUrl = createVoteUrl(userID, artistID);
   const songName = model.songs.get(artistID, songID)?.name || "";
   const name = model.users.get(userID)?.name || "";
   const message = `${name}さんは\n${artistName}の代表曲は『${songName}』だと主張しています。\n`;
@@ -264,4 +274,8 @@ function mapShare(
   return {
     url: url.toString(),
   };
+}
+
+function createVoteUrl(userID: string, artistID: string): string {
+  return `https://famous-song.app/votes/users/${userID}/artists/${artistID}`;
 }

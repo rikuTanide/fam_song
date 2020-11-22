@@ -52,6 +52,10 @@ export interface VoteSongProps {
 }
 
 export interface VotePageProps {
+  ogTitle: string;
+  ogUrl: string;
+  ogICatch: string;
+
   userID: string;
   userName: string;
   artistID: string;

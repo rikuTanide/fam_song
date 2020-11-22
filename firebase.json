@@ -50,6 +50,10 @@
       {
         "source": "/votes/users/*/artists/*",
         "function": "httpHandle"
+      },
+      {
+        "source": "/icache",
+        "function": "iCatch"
       }
     ]
   },

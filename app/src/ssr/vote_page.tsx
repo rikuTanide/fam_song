@@ -24,7 +24,13 @@ export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
         src="https://kit.fontawesome.com/6b7991403e.js"
         crossOrigin="anonymous"
       />
-      <link rel="stylesheet" href="bootstrap-social.css" />
+      <link rel="stylesheet" href="/mypage/bootstrap-social.css" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@isyumi_net" />
+      <meta property="og:url" content={props.ogUrl} />
+      <meta property="og:title" content={props.ogTitle} />
+      <meta property="og:description" content={props.ogTitle} />
+      <meta property="og:image" content={props.ogICatch} />
       <title>代表曲は？</title>
     </head>
     <body>

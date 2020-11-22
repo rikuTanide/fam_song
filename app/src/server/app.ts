@@ -14,7 +14,6 @@ import { renderArtistPage } from "../ssr/artist_page";
 import { renderSongPage } from "../ssr/song_page";
 import { renderUserPage } from "../ssr/user_page";
 import { renderVotePage } from "../ssr/vote_page";
-import { createICache } from "./icatch";
 
 export function server(): express.Application {
   const app = express();
