@@ -168,6 +168,7 @@ export function toVotePageProps(
 export function toMyPageProps(state: State): MyPageProps {
   const model = modeling(state.data);
   const myPageState = state.myPageState;
+  const user = model.users.get(myPageState.userID);
   const tabs: ArtistTabProps[] = model.artists
     .in(myPageState.tabs)
     .keys()
@@ -229,6 +230,7 @@ export function toMyPageProps(state: State): MyPageProps {
   );
 
   return {
+    img: user?.img || "",
     newArtist: myPageState.newArtist,
     submitEnable: myPageState.newArtist.trim().length > 0,
     tab: myPageState.selectTab,

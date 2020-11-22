@@ -61,6 +61,7 @@ export interface VotePageProps {
 }
 
 export interface MyPageProps {
+  img: string;
   tab: string;
   votedArtists: VotedArtistProps[];
   notVotedArtists: NotVotedArtistProps[];

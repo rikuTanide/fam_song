@@ -24,7 +24,7 @@ export const TopPageComponent: React.FunctionComponent<TopPageProps> = (
       <title>代表曲は？</title>
     </head>
     <body>
-      <Jumbotron className="m-5">
+      <Jumbotron className="m-3">
         <h1>代表曲は？</h1>
         <p className="lead">あなたが思うアーティストの代表曲を教えてください</p>
         <hr className="my-4" />
@@ -33,7 +33,7 @@ export const TopPageComponent: React.FunctionComponent<TopPageProps> = (
           投票する
         </a>
       </Jumbotron>
-      <Card className="m-5">
+      <Card className="m-3">
         <Card.Header>
           <Card.Title>みんなの投票</Card.Title>
         </Card.Header>

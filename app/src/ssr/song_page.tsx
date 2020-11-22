@@ -24,7 +24,7 @@ export const SongPageComponent: React.FunctionComponent<SongPageProps> = (
       <title>代表曲は？</title>
     </head>
     <body>
-      <Jumbotron className="m-5">
+      <Jumbotron className="m-3">
         <h1>代表曲は？</h1>
         <p className="lead">
           あなたが思う{props.artistName}の代表曲を教えてください
@@ -35,7 +35,7 @@ export const SongPageComponent: React.FunctionComponent<SongPageProps> = (
           投票する
         </a>
       </Jumbotron>
-      <Breadcrumb className="m-5">
+      <Breadcrumb className="m-3">
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         <Breadcrumb.Item href={`/artists/${props.artistID}`}>
           {props.artistName}
@@ -46,7 +46,7 @@ export const SongPageComponent: React.FunctionComponent<SongPageProps> = (
           {props.songName}
         </Breadcrumb.Item>
       </Breadcrumb>
-      <Card className="m-5">
+      <Card className="m-3">
         <Card.Header>
           <Card.Title>{props.songName}に投票した人</Card.Title>
         </Card.Header>

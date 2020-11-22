@@ -24,7 +24,7 @@ export const ArtistPageComponent: React.FunctionComponent<ArtistPageProps> = (
       <title>代表曲は？</title>
     </head>
     <body>
-      <Jumbotron className="m-5">
+      <Jumbotron className="m-3">
         <h1>代表曲は？</h1>
         <p className="lead">あなたが思うアーティストの代表曲を教えてください</p>
         <hr className="my-4" />
@@ -34,14 +34,14 @@ export const ArtistPageComponent: React.FunctionComponent<ArtistPageProps> = (
         </a>
       </Jumbotron>
 
-      <Breadcrumb className="m-5">
+      <Breadcrumb className="m-3">
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         <Breadcrumb.Item href={`/artists/${props.artistID}`}>
           {props.name}
         </Breadcrumb.Item>
       </Breadcrumb>
 
-      <Card className="m-5">
+      <Card className="m-3">
         <Card.Header>
           <Card.Title>みんなの投票</Card.Title>
         </Card.Header>

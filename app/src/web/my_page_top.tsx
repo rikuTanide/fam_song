@@ -15,13 +15,12 @@ class _MyPageTopComponent extends React.Component<AppProps> {
     return (
       <div>
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand>あのアーティストの代表曲は</Navbar.Brand>
+          <Navbar.Brand href="/">あのアーティストの代表曲は</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
-            <img src={imgUrl} width={30} />
+            <img src={this.props.img} width={30} />
           </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="#home">アカウント</Nav.Link>
               <Nav.Link onClick={() => this.props.logout()}>
                 ログアウト
               </Nav.Link>

@@ -23,7 +23,7 @@ export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
       <title>代表曲は？</title>
     </head>
     <body>
-      <Jumbotron className="m-5">
+      <Jumbotron className="m-3">
         <h1>代表曲は？</h1>
         <p className="lead">あなたが思うアーティストの代表曲を教えてください</p>
         <hr className="my-4" />
@@ -33,14 +33,14 @@ export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
         </a>
       </Jumbotron>
 
-      <Breadcrumb className="m-5">
+      <Breadcrumb className="m-3">
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         <Breadcrumb.Item href={`/users/${props.userID}`}>
           {props.userName}
         </Breadcrumb.Item>
       </Breadcrumb>
 
-      <Card className="m-5">
+      <Card className="m-3">
         <Card.Header>
           <Card.Title>
             <img src={props.userImg} width={30} />
