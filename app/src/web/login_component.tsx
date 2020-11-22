@@ -23,7 +23,12 @@ export const LoginComponent: React.FunctionComponent<{
       <a
         className="btn btn-block btn-social btn-twitter"
         href="#"
-        onClick={() => props.callback()}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          props.callback();
+          return false;
+        }}
         target="_blank"
         rel="nofollow noopener noreferrer"
       >
