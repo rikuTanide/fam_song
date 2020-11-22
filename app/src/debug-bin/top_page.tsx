@@ -1,6 +1,5 @@
 import * as React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
-import { TopPageComponent } from "../ssr/top_page";
+import { renderTopPage } from "../ssr/top_page";
 import { TopPageProps } from "../types/props";
 
 function main() {
@@ -22,7 +21,7 @@ function main() {
       },
     ],
   };
-  const html = renderToStaticMarkup(<TopPageComponent {...props} />);
+  const html = renderTopPage(props);
   process.stdout.write(html);
 }
 

@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { TopPageComponent } from "../ssr/top_page";
 import { TopPageProps, UserPageProps, VotePageProps } from "../types/props";
 import { UserPageComponent } from "../ssr/user_page";
-import { VotePageComponent } from "../ssr/vote_page";
+import { renderVotePage, VotePageComponent } from "../ssr/vote_page";
 
 function main() {
   const props: VotePageProps = {
@@ -15,7 +15,7 @@ function main() {
     songName: "TSUNAMI",
     userID: "1",
   };
-  const html = renderToStaticMarkup(<VotePageComponent {...props} />);
+  const html = renderVotePage(props);
   process.stdout.write(html);
 }
 

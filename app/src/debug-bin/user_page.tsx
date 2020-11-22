@@ -1,7 +1,7 @@
 import * as React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { UserPageProps } from "../types/props";
-import { UserPageComponent } from "../ssr/user_page";
+import { renderUserPage, UserPageComponent } from "../ssr/user_page";
 
 function main() {
   const props: UserPageProps = {
@@ -23,7 +23,7 @@ function main() {
       },
     ],
   };
-  const html = renderToStaticMarkup(<UserPageComponent {...props} />);
+  const html = renderUserPage(props);
   process.stdout.write(html);
 }
 

@@ -1,6 +1,11 @@
 import * as React from "react";
 import { TopPageProps } from "../types/props";
-import { Badge, Card, Jumbotron, ListGroup } from "react-bootstrap";
+import { Badge, Card, Jumbotron } from "react-bootstrap";
+import { renderToStaticMarkup } from "react-dom/server";
+
+export function renderTopPage(props: TopPageProps): string {
+  return renderToStaticMarkup(<TopPageComponent {...props} />);
+}
 
 export const TopPageComponent: React.FunctionComponent<TopPageProps> = (
   props

@@ -1,7 +1,11 @@
 import * as React from "react";
 import { TopPageProps, UserPageProps, VotePageProps } from "../types/props";
 import { Badge, Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
-
+import { renderToStaticMarkup } from "react-dom/server";
+import { UserPageComponent } from "./user_page";
+export function renderVotePage(props: VotePageProps): string {
+  return renderToStaticMarkup(<VotePageComponent {...props} />);
+}
 export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
   props
 ) => (
@@ -34,18 +38,17 @@ export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
 
       <Breadcrumb className="m-5">
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item
-          href={`/artists/${props.artistID}`}
-        >
+        <Breadcrumb.Item href={`/artists/${props.artistID}`}>
           {props.artistName}
         </Breadcrumb.Item>
         <Breadcrumb.Item
-            href={`/artists/${props.artistID}/songs/${props.songID}`}
+          href={`/artists/${props.artistID}/songs/${props.songID}`}
         >
           {props.songName}
         </Breadcrumb.Item>
         <Breadcrumb.Item href={`/users/${props.userID}`}>
-          {props.userScreenName}{props.userName}
+          {props.userScreenName}
+          {props.userName}
         </Breadcrumb.Item>
       </Breadcrumb>
 

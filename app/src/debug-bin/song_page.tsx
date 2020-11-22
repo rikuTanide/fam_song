@@ -1,10 +1,7 @@
 import * as React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
-import { TopPageComponent } from "../ssr/top_page";
-import { ArtistPageProps, SongPageProps, TopPageProps } from "../types/props";
-import { ArtistPageComponent } from "../ssr/artist_page";
+import { SongPageProps } from "../types/props";
 import { imgUrl } from "../web/my_page_top";
-import { SongPageComponent } from "../ssr/song_page";
+import { renderSongPage } from "../ssr/song_page";
 
 function main() {
   const props: SongPageProps = {
@@ -33,7 +30,7 @@ function main() {
       },
     ],
   };
-  const html = renderToStaticMarkup(<SongPageComponent {...props} />);
+  const html = renderSongPage(props);
   process.stdout.write(html);
 }
 

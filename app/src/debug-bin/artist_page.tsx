@@ -1,8 +1,6 @@
 import * as React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
-import { TopPageComponent } from "../ssr/top_page";
-import { ArtistPageProps, TopPageProps } from "../types/props";
-import { ArtistPageComponent } from "../ssr/artist_page";
+import { ArtistPageProps } from "../types/props";
+import { renderArtistPage } from "../ssr/artist_page";
 
 function main() {
   const props: ArtistPageProps = {
@@ -14,7 +12,7 @@ function main() {
       { songID: "3", name: "波乗りシンドバット", voteCount: 15 },
     ],
   };
-  const html = renderToStaticMarkup(<ArtistPageComponent {...props} />);
+  const html = renderArtistPage(props);
   process.stdout.write(html);
 }
 

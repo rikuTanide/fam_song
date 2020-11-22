@@ -37,17 +37,22 @@ export const onRequest = functions
     await snapshot.ref.remove();
   });
 
+export function cleansing(org: Data | undefined): Data {
+  const data = (org || {}) as Data;
+  const pdata: Data = {
+    artists: data.artists || {},
+    users: data.users || {},
+    votes: data.votes || {},
+    songs: data.songs || {},
+  };
+  return pdata;
+}
+
 async function readData(snapshot: DataSnapshot): Promise<Data> {
   return new Promise<any>((resolve) => {
     snapshot.ref.root.child("data").once("value", (ss) => {
-      const data = (ss.val() || {}) as Data;
-      const pdata: Data = {
-        artists: data.artists || {},
-        users: data.users || {},
-        votes: data.votes || {},
-        songs: data.songs || {},
-      };
-      resolve(pdata);
+      const data = cleansing(ss.val());
+      resolve(data);
     });
   });
 }

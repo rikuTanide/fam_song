@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@types/dateformat": "^3.0.1",
+    "@types/node-fetch": "^2.5.7",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.11",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
@@ -24,6 +25,7 @@
     "firebase-admin": "^9.4.1",
     "firebase-functions": "^3.11.0",
     "html-webpack-plugin": "^4.5.0",
+    "node-fetch": "^2.6.1",
     "prettier": "^2.1.2",
     "range": "^0.0.3",
     "react": "^17.0.1",

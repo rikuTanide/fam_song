@@ -1,7 +1,11 @@
 import * as React from "react";
-import { TopPageProps, UserPageProps } from "../types/props";
-import { Badge, Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
+import { UserPageProps } from "../types/props";
+import { Breadcrumb, Card, Jumbotron } from "react-bootstrap";
+import { renderToStaticMarkup } from "react-dom/server";
 
+export function renderUserPage(props: UserPageProps): string {
+  return renderToStaticMarkup(<UserPageComponent {...props} />);
+}
 export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
   props
 ) => (
