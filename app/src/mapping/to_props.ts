@@ -136,6 +136,7 @@ export function toUserPageProps(data: Data, userID: string): UserPageProps {
   );
   const user = model.users.get(userID);
   return {
+    userID: userID,
     userName: user?.name || "",
     userScreenName: user?.screenName || "",
     voteSongs: voteSongs,

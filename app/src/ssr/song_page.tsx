@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ArtistPageProps, SongPageProps, TopPageProps } from "../types/props";
-import { Badge, Card, Jumbotron, ListGroup } from "react-bootstrap";
+import { Badge, Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
 
 export const SongPageComponent: React.FunctionComponent<SongPageProps> = (
   props
@@ -30,6 +30,17 @@ export const SongPageComponent: React.FunctionComponent<SongPageProps> = (
           投票する
         </a>
       </Jumbotron>
+      <Breadcrumb className="m-5">
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href={`/artists/${props.artistID}`}>
+          {props.artistName}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item
+          href={`/artists/${props.artistID}/songs/${props.songID}`}
+        >
+          {props.songName}
+        </Breadcrumb.Item>
+      </Breadcrumb>
       <Card className="m-5">
         <Card.Header>
           <Card.Title>{props.songName}に投票した人</Card.Title>
@@ -38,7 +49,10 @@ export const SongPageComponent: React.FunctionComponent<SongPageProps> = (
           <ListGroup>
             {props.voteUsers.map((u) => (
               <ListGroup.Item key={u.userID}>
-                <a className="text-dark" href={`/users/${u.userID}`}>
+                <a
+                  className="text-dark"
+                  href={`/votes/users/${u.userID}/artists/${props.artistID}`}
+                >
                   <img className="img-thumbnail" src={u.img} width={30} />
                   {u.twitterScreenName}
                   {u.twitterName}

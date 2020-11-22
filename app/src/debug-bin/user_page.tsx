@@ -1,11 +1,11 @@
 import * as React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { TopPageComponent } from "../ssr/top_page";
-import { TopPageProps, UserPageProps } from "../types/props";
+import { UserPageProps } from "../types/props";
 import { UserPageComponent } from "../ssr/user_page";
 
 function main() {
   const props: UserPageProps = {
+    userID: "1",
     userName: "@isyumi_net",
     userScreenName: "弩.net",
     voteSongs: [

@@ -39,6 +39,7 @@ export interface VoteUserProps {
 }
 
 export interface UserPageProps {
+  userID: string;
   userName: string;
   userScreenName: string;
   voteSongs: VoteSongProps[];

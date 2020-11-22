@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TopPageProps, UserPageProps } from "../types/props";
-import { Badge, Card, Jumbotron, ListGroup } from "react-bootstrap";
+import { Badge, Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
 
 export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
   props
@@ -31,6 +31,15 @@ export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
           投票する
         </a>
       </Jumbotron>
+
+      <Breadcrumb className="m-5">
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href={`/users/${props.userID}`}>
+          {props.userScreenName}
+          {props.userName}
+        </Breadcrumb.Item>
+      </Breadcrumb>
+
       <Card className="m-5">
         <Card.Header>
           <Card.Title>
@@ -49,7 +58,7 @@ export const UserPageComponent: React.FunctionComponent<UserPageProps> = (
               <Card.Body>
                 <a
                   className="text-dark"
-                  href={`/artists/${s.artistID}/songs/${s.songID}`}
+                  href={`/votes/users/${props.userID}/artists/${s.artistID}`}
                 >
                   {s.songName}
                 </a>

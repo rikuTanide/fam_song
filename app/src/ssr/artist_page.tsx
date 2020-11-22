@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ArtistPageProps, TopPageProps } from "../types/props";
-import { Badge, Card, Jumbotron, ListGroup } from "react-bootstrap";
+import { Badge, Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
 
 export const ArtistPageComponent: React.FunctionComponent<ArtistPageProps> = (
   props
@@ -28,6 +28,14 @@ export const ArtistPageComponent: React.FunctionComponent<ArtistPageProps> = (
           投票する
         </a>
       </Jumbotron>
+
+      <Breadcrumb className="m-5">
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href={`/artists/${props.artistID}`}>
+          {props.name}
+        </Breadcrumb.Item>
+      </Breadcrumb>
+
       <Card className="m-5">
         <Card.Header>
           <Card.Title>みんなの投票</Card.Title>

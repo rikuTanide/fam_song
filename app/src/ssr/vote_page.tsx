@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TopPageProps, UserPageProps, VotePageProps } from "../types/props";
-import { Badge, Card, Jumbotron, ListGroup } from "react-bootstrap";
+import { Badge, Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
 
 export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
   props
@@ -31,6 +31,24 @@ export const VotePageComponent: React.FunctionComponent<VotePageProps> = (
           投票する
         </a>
       </Jumbotron>
+
+      <Breadcrumb className="m-5">
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item
+          href={`/artists/${props.artistID}`}
+        >
+          {props.artistName}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item
+            href={`/artists/${props.artistID}/songs/${props.songID}`}
+        >
+          {props.songName}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href={`/users/${props.userID}`}>
+          {props.userScreenName}{props.userName}
+        </Breadcrumb.Item>
+      </Breadcrumb>
+
       <Card className="m-5">
         <Card.Header>
           <Card.Subtitle>
