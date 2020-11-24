@@ -61,7 +61,7 @@ class _MyPageTopComponent extends React.Component<AppProps> {
     const tab =
       document.getElementsByClassName("nav nav-tabs")[0]?.clientHeight || 0;
     const body = window.innerHeight;
-    return body - header - tab;
+    return body - header - tab - 3;
   }
   private artistTabs() {
     return this.props.tabs.map((t) => this.artistTab(t));
