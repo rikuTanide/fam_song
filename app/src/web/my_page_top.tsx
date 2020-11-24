@@ -60,7 +60,7 @@ class _MyPageTopComponent extends React.Component<AppProps> {
     const header = document.getElementById("header")?.clientHeight || 0;
     const tab =
       document.getElementsByClassName("nav nav-tabs")[0]?.clientHeight || 0;
-    const body = window.outerHeight;
+    const body = window.innerHeight;
     return body - header - tab;
   }
   private artistTabs() {
