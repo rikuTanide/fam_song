@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Tabs, Tab, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import {
+  Tabs,
+  Tab,
+  Navbar,
+  Nav,
+  NavDropdown,
+  TabContainer,
+} from "react-bootstrap";
 import { ArtistListComponent } from "./artist_list_component";
 import { ArtistTabProps, MyPageProps } from "../types/props";
 import { ArtistTabComponent } from "./artist_tab_component";
@@ -14,7 +21,7 @@ class _MyPageTopComponent extends React.Component<AppProps> {
   public render(): React.ReactElement {
     return (
       <div>
-        <Navbar bg="light" expand="lg">
+        <Navbar id="header" bg="light" expand="lg">
           <Navbar.Brand href="/">あのアーティストの代表曲は</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
             <img src={this.props.img} width={30} />
@@ -41,12 +48,20 @@ class _MyPageTopComponent extends React.Component<AppProps> {
               votedArtists={this.props.votedArtists}
               notVotedArtists={this.props.notVotedArtists}
               onSelectTab={this.props.selectTab}
+              height={this.calcHeight()}
             />
           </Tab.Content>
           {this.artistTabs()}
         </Tabs>
       </div>
     );
+  }
+  private calcHeight(): number {
+    const header = document.getElementById("header")?.clientHeight || 0;
+    const tab =
+      document.getElementsByClassName("nav nav-tabs")[0]?.clientHeight || 0;
+    const body = window.outerHeight;
+    return body - header - tab;
   }
   private artistTabs() {
     return this.props.tabs.map((t) => this.artistTab(t));
@@ -66,6 +81,7 @@ class _MyPageTopComponent extends React.Component<AppProps> {
           onVote={(artistID, songID) => this.props.putVote(artistID, songID)}
           onRemoveVote={(artistID) => this.props.deleteVote(artistID)}
           onCloseTab={(artistID) => this.props.deleteTab(artistID)}
+          height={this.calcHeight()}
         />
       </Tab.Content>
     );

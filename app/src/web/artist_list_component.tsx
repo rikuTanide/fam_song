@@ -20,8 +20,9 @@ export const ArtistListComponent: React.SFC<{
   votedArtists: VotedArtistProps[];
   notVotedArtists: NotVotedArtistProps[];
   onSelectTab: OnSelectTab;
+  height: number;
 }> = (props) => (
-  <div>
+  <div style={{ height: props.height, overflow: "scroll" }}>
     <Card className="m-2 mt-5 shadow-sm">
       <Card.Header>
         <Card.Title>投票しよう</Card.Title>

@@ -26,9 +26,10 @@ export const ArtistTabComponent: React.FunctionComponent<
     onVote: OnVote;
     onRemoveVote: OnRemoveVote;
     onCloseTab: OnCloseTab;
+    height: number;
   }
 > = (props) => (
-  <div>
+  <div style={{ height: props.height, overflow: "scroll" }}>
     <p className="text-right">
       <Button variant="danger" onClick={() => props.onCloseTab(props.artistID)}>
         ×
@@ -38,70 +39,71 @@ export const ArtistTabComponent: React.FunctionComponent<
       <h1>{props.name}</h1>
     </Jumbotron>
 
-    <Card className="mt-5 m-2 shadow-sm">
-      <Card.Header>
-        <Card.Title>代表曲は？</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <ListGroup>
-          <ListGroup.Item>
-            <Form.Check
-              type="radio"
-              label="未選択"
-              name="songs"
-              onChange={() => props.onRemoveVote(props.artistID)}
-              checked={!props.selected}
-            />
-          </ListGroup.Item>
-          {props.songs.map((s) => (
-            <ListGroup.Item key={s.songID}>
+    <div className="overflow-hidden">
+      <Card className="mt-5 m-2 shadow-sm">
+        <Card.Header>
+          <Card.Title>代表曲は？</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <ListGroup>
+            <ListGroup.Item>
               <Form.Check
-                type={"radio"}
-                label={s.songName}
+                type="radio"
+                label="未選択"
                 name="songs"
-                onChange={() => props.onVote(props.artistID, s.songID)}
-                checked={s.selected}
+                onChange={() => props.onRemoveVote(props.artistID)}
+                checked={!props.selected}
               />
             </ListGroup.Item>
-          ))}
-        </ListGroup>
-      </Card.Body>
-    </Card>
+            {props.songs.map((s) => (
+              <ListGroup.Item key={s.songID}>
+                <Form.Check
+                  type={"radio"}
+                  label={s.songName}
+                  name="songs"
+                  onChange={() => props.onVote(props.artistID, s.songID)}
+                  checked={s.selected}
+                />
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Card.Body>
+      </Card>
 
-    <Card className="my-5 mx-2 shadow-sm">
-      <Card.Header>
-        <Card.Title>曲を追加</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <Form.Group>
-          <Form.Label>曲名</Form.Label>
-          <Form.Control
-            type="text"
-            value={props.newSong}
-            onChange={(e: any) =>
-              props.onNewSongNameInput(props.artistID, e.target.value)
-            }
-            disabled={props.loading}
-          />
-        </Form.Group>
-      </Card.Body>
-      <Card.Footer className="text-muted">
-        <Button
-          disabled={!props.submitEnable}
-          variant="primary"
-          type="submit"
-          onClick={() => props.onNewSongSubmit(props.artistID)}
-        >
-          追加
-        </Button>
-        {props.loading ? (
-          <Spinner animation="border" variant="primary" size="sm" />
-        ) : (
-          ""
-        )}
-      </Card.Footer>
-    </Card>
-
+      <Card className="my-5 mx-2 shadow-sm">
+        <Card.Header>
+          <Card.Title>曲を追加</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <Form.Group>
+            <Form.Label>曲名</Form.Label>
+            <Form.Control
+              type="text"
+              value={props.newSong}
+              onChange={(e: any) =>
+                props.onNewSongNameInput(props.artistID, e.target.value)
+              }
+              disabled={props.loading}
+            />
+          </Form.Group>
+        </Card.Body>
+        <Card.Footer className="text-muted">
+          <Button
+            disabled={!props.submitEnable}
+            variant="primary"
+            type="submit"
+            onClick={() => props.onNewSongSubmit(props.artistID)}
+          >
+            追加
+          </Button>
+          {props.loading ? (
+            <Spinner animation="border" variant="primary" size="sm" />
+          ) : (
+            ""
+          )}
+        </Card.Footer>
+      </Card>
+    </div>
     {props.share ? <ShareComponent {...props.share} /> : ""}
     {props.icacheUrl ? <img src={props.icacheUrl} width="1" /> : ""}
   </div>
