@@ -50,7 +50,7 @@ export const ArtistTabComponent: React.FunctionComponent<
               <Form.Check
                 type="radio"
                 label="未選択"
-                name="songs"
+                name={`songs-${props.artistID}`}
                 onChange={() => props.onRemoveVote(props.artistID)}
                 checked={!props.selected}
               />
@@ -60,7 +60,7 @@ export const ArtistTabComponent: React.FunctionComponent<
                 <Form.Check
                   type={"radio"}
                   label={s.songName}
-                  name="songs"
+                  name={`songs-${props.artistID}`}
                   onChange={() => props.onVote(props.artistID, s.songID)}
                   checked={s.selected}
                 />
@@ -103,8 +103,8 @@ export const ArtistTabComponent: React.FunctionComponent<
           )}
         </Card.Footer>
       </Card>
+      {props.share ? <ShareComponent {...props.share} /> : ""}
     </div>
-    {props.share ? <ShareComponent {...props.share} /> : ""}
     {props.icacheUrl ? <img src={props.icacheUrl} width="1" /> : ""}
   </div>
 );
