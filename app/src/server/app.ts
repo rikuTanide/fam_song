@@ -31,6 +31,10 @@ async function fetchData(): Promise<Data> {
 }
 
 async function index(req: express.Request, res: express.Response) {
+  if (req.header("x-forwarded-host") === "fam-song.web.app") {
+    res.redirect(301, "https://famous-song.app/");
+    return;
+  }
   const data = await fetchData();
   const props = toTopPageProps(data);
   const html = renderTopPage(props);
