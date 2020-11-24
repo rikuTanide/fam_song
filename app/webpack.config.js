@@ -28,7 +28,7 @@ module.exports = {
             title: 'HOME',
             template: './src/web/index.html'
         }),
-        new copyWebpackPlugin({patterns: [{from: './src/web/style'}]}),
+        new copyWebpackPlugin({patterns: [{from: './src/web/static'}]}),
     ],
     devServer: {
         host: 'localhost',

@@ -13,8 +13,8 @@ export async function createICache(
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-<body style="width:1200px; height: 630px">
-<div style="width:1200px; height: 630px" class="bg-primary d-flex align-items-center">
+<body style="width:700px; height: 500px">
+<div style="width:700px; height: 500px" class="bg-primary d-flex align-items-center">
 
 <div class="card mx-auto" style="width: 600px;">
 <div class="card-header">

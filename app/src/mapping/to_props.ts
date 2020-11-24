@@ -34,7 +34,7 @@ export function toTopPageProps(data: Data): TopPageProps {
           const topSongID = songs.topSongID();
           const topSong = topSongID ? songs.get(topSongID) : undefined;
           const topSongName = topSong?.name || "";
-          const count = model.artists.voteCount(aid);
+          const count = model.votes.voteUsers(aid, topSongID || "").length;
 
           return {
             artistID: aid,
@@ -214,7 +214,7 @@ export function toMyPageProps(state: State): MyPageProps {
         name: artistName,
         songs: songs,
         newSong: newSong,
-        submitEnable: newSong.trim().length > 0,
+        submitEnable: newSong.trim().length > 0 && !myPageState.loading,
         loading: myPageState.loading,
         selected: !!voteSongID,
         share: share,
