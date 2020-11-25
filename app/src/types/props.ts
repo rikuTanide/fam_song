@@ -5,9 +5,7 @@ export interface TopPageProps {
 export interface ArtistProps {
   artistID: string;
   name: string;
-  topSongID: string;
-  topSongName: string;
-  count: number;
+  songRanking: SongProps[];
 }
 
 export interface ArtistPageProps {

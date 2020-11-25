@@ -8,16 +8,20 @@ function main() {
       {
         artistID: "1",
         name: "サザンオールスターズ",
-        topSongID: "1",
-        topSongName: "TSUNAMI",
-        count: 23,
+        songRanking: [
+          { songID: "1", name: "TSUNAMI", voteCount: 5 },
+          { songID: "2", name: "エロティカセブン", voteCount: 10 },
+          { songID: "3", name: "波乗りシンドバット", voteCount: 15 },
+        ],
       },
       {
         artistID: "2",
         name: "ポルノグラフィティ",
-        topSongID: "2",
-        topSongName: "アゲハ蝶",
-        count: 123,
+        songRanking: [
+          { songID: "1", name: "アゲハ蝶", voteCount: 5 },
+          { songID: "2", name: "メリッサ", voteCount: 15 },
+          { songID: "3", name: "MUGEN", voteCount: 25 },
+        ],
       },
     ],
   };

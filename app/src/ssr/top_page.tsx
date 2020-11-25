@@ -1,6 +1,12 @@
 import * as React from "react";
 import { TopPageProps } from "../types/props";
-import { Badge, Card, Jumbotron } from "react-bootstrap";
+import {
+  Badge,
+  Card,
+  Jumbotron,
+  ListGroup,
+  ListGroupItem,
+} from "react-bootstrap";
 import { renderToStaticMarkup } from "react-dom/server";
 import { TrackingTagComponent } from "./artist_page";
 
@@ -47,13 +53,17 @@ export const TopPageComponent: React.FunctionComponent<TopPageProps> = (
                 </a>
               </Card.Header>
               <Card.Body>
-                <a
-                  className="text-dark"
-                  href={`/artists/${a.artistID}/songs/${a.topSongID}`}
-                >
-                  {a.topSongName}
-                  <Badge variant="danger">{a.count}</Badge>
-                </a>
+                <ListGroup>
+                  {a.songRanking.map((s) => (
+                    <ListGroupItem
+                      key={s.songID}
+                      action
+                      link={`/artists/${a.artistID}/songs/${s.songID}`}
+                    >
+                      {s.name} <Badge variant="danger">{s.voteCount}</Badge>
+                    </ListGroupItem>
+                  ))}
+                </ListGroup>
               </Card.Body>
             </Card>
           ))}

@@ -31,20 +31,37 @@ export function toTopPageProps(data: Data): TopPageProps {
           const artist = model.artists.get(aid);
           const name = artist?.name || "";
           const songs = model.songs.getArtistSongs(aid);
-          const topSongID = songs.topSongID();
-          const topSong = topSongID ? songs.get(topSongID) : undefined;
-          const topSongName = topSong?.name || "";
-          const count = model.votes.voteUsers(aid, topSongID || "").length;
+
+          const topSongs = model.songs
+            .getArtistSongs(aid)
+            .sortByVoteCount()
+            .keys()
+            .sort((s1, s2) =>
+              songs.voteCount(s1) > songs.voteCount(s2) ? -1 : 1
+            )
+            .slice(0, 3)
+            .map((songID) => mapSongRanking(model, aid, songID));
 
           return {
             artistID: aid,
             name: name,
-            count: count,
-            topSongID: topSongID || "",
-            topSongName: topSongName,
+            songRanking: topSongs,
           };
         }
       ),
+  };
+}
+
+function mapSongRanking(
+  model: Models,
+  artistID: string,
+  songID: string
+): SongProps {
+  const song = model.songs.get(artistID, songID);
+  return {
+    songID: songID,
+    name: song?.name || "",
+    voteCount: model.songs.voteCount(artistID, songID),
   };
 }
 
@@ -54,19 +71,10 @@ export function toArtistPageProps(
 ): ArtistPageProps {
   const model = modeling(data);
   const artist = model.artists.get(artistID);
-  const songs: SongProps[] = model.songs
+  const songs = model.songs
     .getArtistSongs(artistID)
     .keys()
-    .map(
-      (songID): SongProps => {
-        const song = model.songs.get(artistID, songID);
-        return {
-          songID: songID,
-          name: song?.name || "",
-          voteCount: model.songs.voteCount(artistID, songID),
-        };
-      }
-    );
+    .map((songID) => mapSongRanking(model, artistID, songID));
   return {
     artistID: artistID,
     name: artist?.name || "",

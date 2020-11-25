@@ -74,12 +74,14 @@ function setTabs(state: State, tabs: string[]): State {
 
 function deleteTab(state: State, tab: string): State {
   const myPageState = state.myPageState;
+  const currentTab = myPageState.tabs.indexOf(tab);
+  const nextTab = currentTab <= 0 ? "" : myPageState.tabs[currentTab - 1];
   const tabs = myPageState.tabs;
   const newTabs = tabs.filter((t) => t != tab);
   const newMyPageState: MyPageState = {
     ...myPageState,
     tabs: newTabs,
-    selectTab: myPageState.selectTab == tab ? "" : myPageState.selectTab,
+    selectTab: nextTab,
   };
   return { ...state, myPageState: newMyPageState };
 }
