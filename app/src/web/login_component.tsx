@@ -33,7 +33,7 @@ export const LoginComponent: React.FunctionComponent<{
         <Card.Title>ログイン</Card.Title>
       </Card.Header>
       <Card.Body>
-        <Button onClick={() => props.anonymousCallback()}>
+        <Button id="anonymous-loading-button" onClick={() => props.anonymousCallback()}>
           ログインせずに投票
         </Button>
       </Card.Body>
