@@ -10,6 +10,7 @@ import {
   Button,
   Spinner,
   Jumbotron,
+  Alert,
 } from "react-bootstrap";
 import {
   OnCloseTab,
@@ -29,6 +30,7 @@ export const ArtistTabComponent: React.FunctionComponent<
     onCloseTab: OnCloseTab;
     height: number;
     onSongNameUpdate: OnSongNameUpdate;
+    toTop: () => void;
   }
 > = (props) => (
   <div style={{ height: props.height, overflow: "scroll" }}>
@@ -47,6 +49,19 @@ export const ArtistTabComponent: React.FunctionComponent<
           <Card.Title>代表曲は？</Card.Title>
         </Card.Header>
         <Card.Body>
+          {props.selected ? (
+            <Alert variant="info">
+              {props.selectedSongName}に投票しました。
+              <br />
+              是非ほかのアーティストにも投票してください！
+              <br />
+              <Button variant="info" onClick={() => props.toTop()}>
+                ほかのアーティストも投票
+              </Button>
+            </Alert>
+          ) : (
+            ""
+          )}
           <ListGroup>
             <ListGroup.Item>
               <Form.Check

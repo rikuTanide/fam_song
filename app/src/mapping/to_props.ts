@@ -73,6 +73,7 @@ export function toArtistPageProps(
   const artist = model.artists.get(artistID);
   const songs = model.songs
     .getArtistSongs(artistID)
+    .sortByVoteCount()
     .keys()
     .map((songID) => mapSongRanking(model, artistID, songID));
   return {
@@ -229,6 +230,7 @@ export function toMyPageProps(state: State): MyPageProps {
         icacheUrl: voteSongID
           ? createICacheUrl(userName, artistName, songName)
           : undefined,
+        selectedSongName: songName,
       };
     });
 

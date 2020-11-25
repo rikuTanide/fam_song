@@ -99,6 +99,8 @@ export interface ArtistTabProps {
   share?: ShareProps;
 
   icacheUrl?: string;
+
+  selectedSongName: string;
 }
 
 export interface SongOptionProps {

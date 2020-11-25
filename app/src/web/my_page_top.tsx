@@ -85,6 +85,7 @@ class _MyPageTopComponent extends React.Component<AppProps> {
           onSongNameUpdate={(artistID, songID) =>
             this.props.updateSongName(artistID, songID)
           }
+          toTop={() => this.props.selectTab("")}
         />
       </Tab.Content>
     );
