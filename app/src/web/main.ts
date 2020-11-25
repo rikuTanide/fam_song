@@ -43,7 +43,7 @@ export async function main() {
         const nickname = window.prompt("あなたのニックネームを教えてください");
         if (!nickname) return false;
         const button = document.getElementById("anonymous-loading-button");
-        if(button){
+        if (button) {
           button.textContent = "loading...";
         }
         app
