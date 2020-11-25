@@ -58,7 +58,7 @@ export const TopPageComponent: React.FunctionComponent<TopPageProps> = (
                     <ListGroupItem
                       key={s.songID}
                       action
-                      link={`/artists/${a.artistID}/songs/${s.songID}`}
+                      href={`/artists/${a.artistID}/songs/${s.songID}`}
                     >
                       {s.name} <Badge variant="danger">{s.voteCount}</Badge>
                     </ListGroupItem>
