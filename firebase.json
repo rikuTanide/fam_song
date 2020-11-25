@@ -32,6 +32,10 @@
         "destination": "/mypage/favicon.ico"
       },
       {
+        "source": "/noimg.jpg",
+        "destination": "/mypage/noimg.jpg"
+      },
+      {
         "source": "/",
         "function": "httpHandle"
       },

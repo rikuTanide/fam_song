@@ -67,16 +67,16 @@ export const ArtistTabComponent: React.FunctionComponent<
                   onChange={() => props.onVote(props.artistID, s.songID)}
                   checked={s.selected}
                 />
-                <div className="float-right">
-                  <Button
-                    variant="secondary"
-                    onClick={() =>
-                      props.onSongNameUpdate(props.artistID, s.songID)
-                    }
-                  >
-                    <i className="fas fa-edit" />
-                  </Button>
-                </div>
+                {/*<div className="float-right">*/}
+                {/*  <Button*/}
+                {/*    variant="secondary"*/}
+                {/*    onClick={() =>*/}
+                {/*      props.onSongNameUpdate(props.artistID, s.songID)*/}
+                {/*    }*/}
+                {/*  >*/}
+                {/*    <i className="fas fa-edit" />*/}
+                {/*  </Button>*/}
+                {/*</div>*/}
               </ListGroup.Item>
             ))}
           </ListGroup>

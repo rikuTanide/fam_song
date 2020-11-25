@@ -39,9 +39,25 @@ export async function main() {
         return false;
       };
 
+      const anonymousCallback = (): boolean => {
+        const nickname = window.prompt("あなたのニックネームを教えてください");
+        if (!nickname) return false;
+        app
+          .auth()
+          .signInAnonymously()
+          .then((res) => {
+            const uid = res.user?.uid;
+            if (!uid) return;
+            const req = new Requests(app);
+            req.putUser(uid, { name: nickname, img: "/noimg.jpg" });
+          });
+        return false;
+      };
+
       const element = document.getElementById("react-root");
       const rootElement = React.createElement(LoginComponent, {
         callback: callback,
+        anonymousCallback: anonymousCallback,
       });
       ReactDOM.render(rootElement, element);
     }
