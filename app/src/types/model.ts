@@ -120,6 +120,19 @@ export class SongModels {
   public voteCount(artistID: string, songID: string): number {
     return this.artistVoteCounts(artistID).get(songID) || 0;
   }
+
+  public updateSongName(
+    artistID: string,
+    songID: string,
+    newSongName: string
+  ): Songs {
+    const newSong: Song = { ...this.data[artistID][songID], name: newSongName };
+    const newArtistSongs: ArtistSongs = {
+      ...this.data[artistID],
+      [songID]: newSong,
+    };
+    return { ...this.data, [artistID]: newArtistSongs };
+  }
 }
 
 export class ArtistSongModels {

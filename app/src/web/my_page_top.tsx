@@ -82,6 +82,9 @@ class _MyPageTopComponent extends React.Component<AppProps> {
           onRemoveVote={(artistID) => this.props.deleteVote(artistID)}
           onCloseTab={(artistID) => this.props.deleteTab(artistID)}
           height={this.calcHeight()}
+          onSongNameUpdate={(artistID, songID) =>
+            this.props.updateSongName(artistID, songID)
+          }
         />
       </Tab.Content>
     );

@@ -16,6 +16,7 @@ import {
   OnNewSongNameInput,
   OnNewSongSubmit,
   OnRemoveVote,
+  OnSongNameUpdate,
   OnVote,
 } from "./index";
 
@@ -27,6 +28,7 @@ export const ArtistTabComponent: React.FunctionComponent<
     onRemoveVote: OnRemoveVote;
     onCloseTab: OnCloseTab;
     height: number;
+    onSongNameUpdate: OnSongNameUpdate;
   }
 > = (props) => (
   <div style={{ height: props.height, overflow: "scroll" }}>
@@ -58,12 +60,23 @@ export const ArtistTabComponent: React.FunctionComponent<
             {props.songs.map((s) => (
               <ListGroup.Item key={s.songID}>
                 <Form.Check
+                  style={{ display: "inline" }}
                   type={"radio"}
                   label={s.songName}
                   name={`songs-${props.artistID}`}
                   onChange={() => props.onVote(props.artistID, s.songID)}
                   checked={s.selected}
                 />
+                <div className="float-right">
+                  <Button
+                    variant="secondary"
+                    onClick={() =>
+                      props.onSongNameUpdate(props.artistID, s.songID)
+                    }
+                  >
+                    <i className="fas fa-edit" />
+                  </Button>
+                </div>
               </ListGroup.Item>
             ))}
           </ListGroup>

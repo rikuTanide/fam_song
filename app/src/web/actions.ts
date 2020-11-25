@@ -146,6 +146,23 @@ export function selectTab(artistID: string) {
     api.storageService.setCurrentTab(state.myPageState.selectTab);
   };
 }
+export function updateSongName(artistID: string, songID: string) {
+  return async (
+    dispatch: Dispatch,
+    getState: GetState,
+    api: ExternalArguments
+  ) => {
+    dispatch(_selectTab(artistID));
+    const state = getState();
+    const model = modeling(state.data);
+    const songName = model.songs.get(artistID, songID)?.name || "";
+    const newSongName = window.prompt("曲名を変更", songName);
+    if (!newSongName) return;
+    const newSongs = model.songs.updateSongName(artistID, songID, newSongName);
+    dispatch(dataUpdate({ ...state.data, songs: newSongs }));
+    api.requests.putSong(artistID, songID, newSongName);
+  };
+}
 const actionCreator = actionCreatorFactory();
 export const setUserID = actionCreator<string>("setUserID");
 export const setLoading = actionCreator<boolean>("setLoading");

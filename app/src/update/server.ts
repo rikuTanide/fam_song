@@ -1,7 +1,13 @@
 import { Request, Response } from "../types/request_type";
 import { Artist, Song, User, Vote } from "../types/data";
 import { Models } from "../types/model";
-import { PATH_ARTISTS, PATH_SONGS, PATH_USERS, PATH_VOTE } from "../values";
+import {
+  PATH_ARTISTS,
+  PATH_SONG_NAME,
+  PATH_SONGS,
+  PATH_USERS,
+  PATH_VOTE,
+} from "../values";
 
 export interface FirebaseService {
   set(path: string, value: any): void;
@@ -27,6 +33,17 @@ export function update(
   } else if (method == "POST" && path == PATH_SONGS) {
     const artistID = request.params.artistID;
     return postSong(fs, models, requestID, artistID, payload as Song);
+  } else if (method == "PUT" && path == PATH_SONG_NAME) {
+    const artistID = request.params.artistID;
+    const songID = request.params.songID;
+    return putSongName(
+      fs,
+      models,
+      requestID,
+      artistID,
+      songID,
+      payload as string
+    );
   } else if (method == "PUT" && path == PATH_VOTE) {
     const artistID = request.params.artistID;
     return putVote(fs, models, requestID, userID, artistID, payload as Vote);
@@ -78,6 +95,21 @@ function postSong(
   return {
     requestID: requestID,
     result: songID,
+  };
+}
+
+function putSongName(
+  fs: FirebaseService,
+  models: Models,
+  requestID: string,
+  artistID: string,
+  songID: string,
+  name: string
+): Response {
+  fs.set(`/data/songs/${artistID}/${songID}/name`, name);
+  return {
+    requestID: requestID,
+    result: null,
   };
 }
 
