@@ -51,7 +51,7 @@ export const ArtistTabComponent: React.FunctionComponent<
         <Card.Body>
           {props.selected ? (
             <Alert variant="info">
-              {props.selectedSongName}に投票しました。
+              <strong>{props.selectedSongName}</strong>に投票しました。
               <br />
               是非ほかのアーティストにも投票してください！
               <br />
