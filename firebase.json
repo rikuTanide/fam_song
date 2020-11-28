@@ -58,6 +58,10 @@
       {
         "source": "/icache",
         "function": "iCatch"
+      },
+      {
+        "source": "/artist_icatch",
+        "function": "artistICatch"
       }
     ]
   },

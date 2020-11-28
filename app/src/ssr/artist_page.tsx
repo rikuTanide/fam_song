@@ -2,6 +2,7 @@ import * as React from "react";
 import { ArtistPageProps } from "../types/props";
 import { Badge, Breadcrumb, Card, Jumbotron, ListGroup } from "react-bootstrap";
 import { renderToStaticMarkup } from "react-dom/server";
+import { ShareComponent } from "../web/artist_tab_component";
 
 export function renderArtistPage(props: ArtistPageProps): string {
   return renderToStaticMarkup(<ArtistPageComponent {...props} />);
@@ -20,12 +21,13 @@ export const ArtistPageComponent: React.FunctionComponent<ArtistPageProps> = (
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
         crossOrigin="anonymous"
       />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@isyumi_net" />
-        <meta property="og:url" content={props.ogUrl} />
-        <meta property="og:title" content="あのアーティストの代表曲は？" />
-        <meta property="og:description" content={props.ogTitle} />
-        <meta property="og:image" content={props.ogICatch} />
+      <link rel="stylesheet" href="/mypage/bootstrap-social.css" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@isyumi_net" />
+      <meta property="og:url" content={props.ogUrl} />
+      <meta property="og:title" content="あのアーティストの代表曲は？" />
+      <meta property="og:description" content={props.ogTitle} />
+      <meta property="og:image" content={props.ogICatch} />
       <title>代表曲は？</title>
     </head>
     <body>
@@ -66,6 +68,7 @@ export const ArtistPageComponent: React.FunctionComponent<ArtistPageProps> = (
           </ListGroup>
         </Card.Body>
       </Card>
+      {props.share ? <ShareComponent {...props.share} /> : ""}
       <TrackingTagComponent />
     </body>
   </html>

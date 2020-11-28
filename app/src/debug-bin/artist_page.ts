@@ -11,6 +11,10 @@ function main() {
       { songID: "2", name: "エロティカセブン", voteCount: 10 },
       { songID: "3", name: "波乗りシンドバット", voteCount: 15 },
     ],
+    ogUrl: "",
+    ogTitle: "",
+    ogICatch: "",
+    share: undefined,
   };
   const html = renderArtistPage(props);
   process.stdout.write(html);

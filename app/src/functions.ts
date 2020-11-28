@@ -8,6 +8,8 @@ import { modeling } from "./mapping/modeling";
 import { server } from "./server/app";
 import * as express from "express";
 import { createICache } from "./server/icatch";
+import { SongProps } from "./types/props";
+import { createArtistICatch } from "./server/artist_icatch";
 
 admin.initializeApp();
 
@@ -22,6 +24,19 @@ export const iCatch = functions
     const artistName = req.query["artist_name"] as string;
     const songName = req.query["song_name"] as string;
     const buffer = await createICache(userName, artistName, songName);
+    res.header("cache-control", "public, max-age=10000");
+    res.write(buffer);
+    res.end();
+  });
+
+export const artistICatch = functions
+  .runWith({
+    memory: "1GB",
+  })
+  .https.onRequest(async (req: express.Request, res: express.Response) => {
+    const artistName = req.query["artist_name"] as string;
+    const songs = JSON.parse(req.query["songs"] as string) as SongProps[];
+    const buffer = await createArtistICatch(artistName, songs);
     res.header("cache-control", "public, max-age=10000");
     res.write(buffer);
     res.end();

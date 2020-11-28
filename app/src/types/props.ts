@@ -15,6 +15,7 @@ export interface ArtistPageProps {
   ogUrl: string;
   ogTitle: string;
   ogICatch: string;
+  share: ShareProps | undefined;
 }
 
 export interface SongProps {

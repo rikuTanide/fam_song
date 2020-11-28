@@ -1,30 +1,31 @@
-import {SongProps} from "../types/props";
+import { SongProps } from "../types/props";
 
 const nodeHtmlToImage = require("node-html-to-image");
 
 function mapSongHtmls(songs: SongProps[]): string {
-  return songs.map(s => `
+  return songs
+    .map(
+      (s) => `
 <div class="list-group-item">
-<a class="text-dark" href="#">
-${s.name}
-</a>
-<span class="badge badge-danger">
-${s.voteCount}票
-</span>
+  <a class="text-dark" href="#">
+    ${s.name}
+  </a>
+  <span class="badge badge-danger">
+    ${s.voteCount}票
+  </span>
 </div>
 
-`).join();
+`
+    )
+    .join("");
 }
 
 export async function createArtistICatch(
   artistName: string,
-  songs: SongProps[],
+  songs: SongProps[]
 ): Promise<Buffer> {
   const songHtmls = mapSongHtmls(songs);
-  const res = (await nodeHtmlToImage({
-    quality: 100,
-    type: "png",
-    html: `<html>
+  const html = `<html>
 <head>
 <meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
@@ -47,7 +48,11 @@ ${songHtmls}
 </div>
 
 </body>
-</html>`,
+</html>`;
+  const res = (await nodeHtmlToImage({
+    quality: 100,
+    type: "png",
+    html: html,
   })) as Buffer;
   return res;
 }

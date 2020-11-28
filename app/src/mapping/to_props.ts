@@ -77,9 +77,11 @@ export function toArtistPageProps(
     .keys()
     .map((songID) => mapSongRanking(model, artistID, songID));
   const name = artist?.name || "";
-  const ogTitle = `${name}といえば？`
+  const ogTitle = `${name}といえば？`;
   const ogUrl = createArtistUrl(artistID);
-  const ogICatch = createArtistICacheUrl(name, songs.slice(0,3));
+  const ogICatch = createArtistICacheUrl(name, songs.slice(0, 3));
+  const share = mapArtistShare(model, artistID);
+
   return {
     artistID: artistID,
     name: name,
@@ -87,6 +89,7 @@ export function toArtistPageProps(
     ogTitle: ogTitle,
     ogUrl: ogUrl,
     ogICatch: ogICatch,
+    share: share,
   };
 }
 
@@ -299,6 +302,22 @@ function mapShare(
   };
 }
 
+function mapArtistShare(
+  model: Models,
+  artistID: string
+): ShareProps | undefined {
+  const artistName = model.artists.get(artistID)?.name || "";
+  const homeUrl = createArtistUrl(artistID);
+  const message = `${artistName}といえば\n`;
+  const url = new URL("https://twitter.com/intent/tweet");
+  url.searchParams.set("text", message);
+  url.searchParams.set("url", homeUrl);
+  url.searchParams.set("hashtags", "アーティストの代表曲は");
+  return {
+    url: url.toString(),
+  };
+}
+
 function createVoteUrl(userID: string, artistID: string): string {
   return `https://famous-song.app/votes/users/${userID}/artists/${artistID}`;
 }
@@ -319,12 +338,9 @@ function createICacheUrl(
   return ogICatch.toString();
 }
 
-function createArtistICacheUrl(
-    artistName: string,
-    songs: SongProps[],
-): string {
-  const ogICatch = new URL("https://famous-song.app/artist_icache");
+function createArtistICacheUrl(artistName: string, songs: SongProps[]): string {
+  const ogICatch = new URL("https://famous-song.app/artist_icatch");
   ogICatch.searchParams.set("artist_name", artistName);
-  ogICatch.searchParams.set("songs", JSON.stringify(songs) );
+  ogICatch.searchParams.set("songs", JSON.stringify(songs));
   return ogICatch.toString();
 }
