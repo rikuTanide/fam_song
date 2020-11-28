@@ -76,10 +76,17 @@ export function toArtistPageProps(
     .sortByVoteCount()
     .keys()
     .map((songID) => mapSongRanking(model, artistID, songID));
+  const name = artist?.name || "";
+  const ogTitle = `${name}といえば？`
+  const ogUrl = createArtistUrl(artistID);
+  const ogICatch = createArtistICacheUrl(name, songs.slice(0,3));
   return {
     artistID: artistID,
-    name: artist?.name || "",
+    name: name,
     songs: songs,
+    ogTitle: ogTitle,
+    ogUrl: ogUrl,
+    ogICatch: ogICatch,
   };
 }
 
@@ -296,6 +303,10 @@ function createVoteUrl(userID: string, artistID: string): string {
   return `https://famous-song.app/votes/users/${userID}/artists/${artistID}`;
 }
 
+function createArtistUrl(artistID: string): string {
+  return `https://famous-song.app/artists/${artistID}`;
+}
+
 function createICacheUrl(
   userName: string,
   artistName: string,
@@ -305,5 +316,15 @@ function createICacheUrl(
   ogICatch.searchParams.set("user_name", userName);
   ogICatch.searchParams.set("artist_name", artistName);
   ogICatch.searchParams.set("song_name", songName);
+  return ogICatch.toString();
+}
+
+function createArtistICacheUrl(
+    artistName: string,
+    songs: SongProps[],
+): string {
+  const ogICatch = new URL("https://famous-song.app/artist_icache");
+  ogICatch.searchParams.set("artist_name", artistName);
+  ogICatch.searchParams.set("songs", JSON.stringify(songs) );
   return ogICatch.toString();
 }

@@ -12,6 +12,9 @@ export interface ArtistPageProps {
   artistID: string;
   name: string;
   songs: SongProps[];
+  ogUrl: string;
+  ogTitle: string;
+  ogICatch: string;
 }
 
 export interface SongProps {
